@@ -25,4 +25,3 @@ A collection of packages used by the core bridging software.
 
 ### [chainbridge-deploy](https://github.com/ChainSafe/ChainBridge)
 Some tooling to help with deployments.
-
