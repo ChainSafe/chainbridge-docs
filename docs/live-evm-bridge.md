@@ -1,6 +1,6 @@
 # Deploying a Live EVM->EVM Token Bridge
 
-This tutorial walks through the process of deploying a token exchange bridge between two Ethereum test networks (Gorli and Rinkeby). It could similarly be applied to link any two Ethereum chains including mainnet.
+This tutorial walks through the process of deploying a token exchange bridge between two Ethereum test networks (Görli and Rinkeby). It could similarly be applied to link any two EVM-based chains including Ethereum mainnet.
 
 At a high level setting up ChainBridge for token transfers requires the following:
 
