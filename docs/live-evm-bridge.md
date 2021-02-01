@@ -1,6 +1,6 @@
 # Deploying a Live EVM->EVM Token Bridge
 
-This tutorial walks through the process of deploying a token exchange bridge between two Ethereum test networks (Gorli and Rinkeby). It could similarly be applied to link any two Ethereum chains including mainnet.
+This tutorial walks through the process of deploying a token exchange bridge between two Ethereum test networks (Görli and Rinkeby). It could similarly be applied to link any two EVM-based chains including Ethereum mainnet.
 
 At a high level setting up ChainBridge for token transfers requires the following:
 
@@ -25,11 +25,11 @@ The basic flow of lock-and-mint is as follows:
 
 It is important to notice that the total number of liquid (non-locked) tokens on both chains combined remains the same. Exchanging the tokens on the destination chain back to native tokens uses the inverse operation, burn-and-release.
 
-1. Wrapped assets on the destination chain are send to a bridge contract which **burns** them
+1. Tokens on the destination chain are send to a bridge contract which **burns** them
 2. A relayer observes this transaction and sends a new transaction to the bridge contract on the source chain. This transaction should include a proof of the burn and a destination address
-3. The bridge contract **unlocks** some number of tokens and deposits them in the destination account.
+3. The bridge contract **unlocks** some number of tokens and deposits them into the destination account.
 
-Provided this refunding of wrapped tokens can be executed at any time and the number of locked tokens is always equal to the number of minted wrapped tokens then then we can say that the wrapped tokens have value equal to the original asset.
+Provided this refunding of tokens can be executed at any time and the number of locked tokens is always equal to the number of minted wrapped tokens then we can say that the wrapped tokens have value equal to the original asset.
 
 ## ChainBridge Components
 
@@ -37,7 +37,7 @@ A ChainBridge deployment on EVM based chains requires the following components
 
 ### Bridge Contract
 
-The bridge contract must be deployed on both the source and destination chains. Its primary task on the source chain is to broker token deposits (ensure they are locked) and emit the events that the relayers  listen for. On the destination chain it is responsible for managing a set of permissioned relayers, aggregating relayers votes on proposals passed from the source chain and executing the desired action (e.g. minting wrapped tokens) on the destination chain when the vote threshold is reached.
+The bridge contract must be deployed on both the source and destination chains. Its primary task on the source chain is to broker token deposits (ensure they are locked) and emit the events that the relayers listen for. On the destination chain it is responsible for managing a set of permissioned relayers, aggregating relayer votes on proposals passed from the source chain and executing the desired action (e.g. minting tokens) on the destination chain when the vote threshold is reached.
 
 ### Handlers
 
@@ -47,7 +47,7 @@ The ERC20 handler contract that ships with ChainBridge can be configured to eith
 
 ### Relay
 
-The relay is an off-chain actor that listens for particular events on the source chain and when certain conditions are met will submit signed proposals to the destination chain. The public keys of the approved relays must be registered with the bridge contract on the destination chain.
+The relay is an off-chain actor that listens for particular events on the source chain and when certain conditions are met will submit signed proposals to the destination chain. The addresses of the approved relays must be registered with the bridge contract on the destination chain.
 
 A relay will also listen for new proposals on the destination chain to verify and cast votes for if valid. Once a proposal has sufficient votes a relayer can execute the proposal to trigger the handler.
 
