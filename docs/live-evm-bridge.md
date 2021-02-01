@@ -276,7 +276,7 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 erc20 
 
 *Note: The amount is given in the smallest denomination (e.g. wei) so this is equivalent to transfering 1 whole token.*
 
-Execute a deposit. Transfers token ownership from own account to 
+Execute a deposit.
 
 ```shell
 cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 erc20 deposit \
@@ -287,7 +287,7 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 erc20 
     --resourceId $RESOURCE_ID
 ```
 
-The relay will wait 10 block confirmations before submitting a request which may take a few minutes on the test network.
+The relay will wait 10 block confirmations before submitting a request which may take a few minutes on the test network. Keep an eye on the `target=XXXX` output in the chainbridge relay window. The transfer will occur when this reaches the block height of the deposit transaction.
 
 The relay will show something similar to below when it picks up a transaction and relays it.
 ![](./img/shell-relaying.png)
@@ -301,9 +301,31 @@ Checking your balance for the token on the destination chain you should see the 
 
 Proposals will continue to be forward provided you keen the relay process running.
 
-## Closing thoughts
+## And back again!
 
-This tutorial creates a one-directional bridge but it is a simple matter to configure the bridge contracts and relayer to make the bridge bi-directional (and add the burn-release logic).
+The bridge we created already supports bi-directional transactions. We can submit a transaction to move tokens back from the destination to the source.
+
+Approve the handler on the destination chain to move tokens on our behalf (to burn them)
+
+```shell
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 10000000000 erc20 approve \
+    --amount 1000000000000000000 \
+    --erc20Address $DST_TOKEN \
+    --recipient $DST_HANDLER
+```
+
+Transfer the wrapped tokens back to the bridge. This should result in the locked tokens being freed on the source chain and returned to your account.
+
+```shell
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 10000000000 erc20 deposit \
+    --amount 1000000000000000000 \
+    --dest 0 \
+    --bridge $DST_BRIDGE \
+    --recipient $SRC_ADDR \
+    --resourceId $RESOURCE_ID
+```
+
+## Closing thoughts
 
 It is also simple to extend the above to work with non-fungible assets (e.g. ERC721) by deploying another handler contract and reconfiguring the bridge.
 
