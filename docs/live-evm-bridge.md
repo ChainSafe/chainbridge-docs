@@ -47,7 +47,7 @@ The ERC20 handler contract that ships with ChainBridge can be configured to eith
 
 ### Relayers
 
-The relay is an off-chain actor that listens for particular events on the source chain and when certain conditions are met will submit signed proposals to the destination chain. The addresses of the approved relays must be registered with the bridge contract on the destination chain.
+The relayer is an off-chain actor that listens for particular events on the source chain and when certain conditions are met will submit signed proposals to the destination chain. The addresses of the approved relays must be registered with the bridge contract on the destination chain.
 
 Once a proposal has sufficient votes a relayer can execute the proposal to trigger the handler.
 
