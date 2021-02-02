@@ -11,7 +11,7 @@ At a high level setting up ChainBridge for token transfers requires the followin
 
 ## Overview of Cross-chain Token Transfers
 
-In reality it is impossible to actually transfer tokens between blockchains. That said, with a bit of contract magic it is easy to make something that is functionally equivalent.
+Tokens are inherently native to a single chain; however, with a bit of contract magic it is possible to make something equivalent to transferring value between two chains.
 
 ### Lock-and-Mint | Burn-and-Release
 
@@ -45,11 +45,11 @@ To allow extensibility the bridge contract is written to call functions in a han
 
 The ERC20 handler contract that ships with ChainBridge can be configured to either lock up the tokens or burn them (if the token allows) on deposit and either mint or release tokens when a proposal is executed. A single handler can handle many tokens but their contract addresses must be registered with the handler ahead of time.
 
-### Relay
+### Relayers
 
 The relay is an off-chain actor that listens for particular events on the source chain and when certain conditions are met will submit signed proposals to the destination chain. The addresses of the approved relays must be registered with the bridge contract on the destination chain.
 
-A relay will also listen for new proposals on the destination chain to verify and cast votes for if valid. Once a proposal has sufficient votes a relayer can execute the proposal to trigger the handler.
+Once a proposal has sufficient votes a relayer can execute the proposal to trigger the handler.
 
 ## Deploying your own bridge
 
