@@ -30,7 +30,9 @@ nav:
       - ChainBridge: spec.md
       - Ethereum: chains/ethereum.md
       - Substrate: chains/substrate.md
-  - Running Locally: local.md
+  - Guides:
+    - Running Locally (EVM <-> Substrate): local.md
+    - Deploying Live (EVM <-> EVM): live-evm-bridge.md
   - Testing: test.md
 
 extra:
