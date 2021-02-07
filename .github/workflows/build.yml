@@ -11,8 +11,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build site
-        uses: addnab/docker-run-action@v1
+      - name: Install python
+        uses: actions/setup-python@v2
         with:
-          image: squidfunk/mkdocs-material:latest
-          options: -v ${{ env.working-directory }}:/docs -it build
+          python-version: 3.x
+      - name: Install mkdocs
+        run: pip install mkdocs-material
+      - name: Build site
+        run: mkdocs build
