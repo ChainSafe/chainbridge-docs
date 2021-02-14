@@ -269,18 +269,18 @@ Approve the handler to spend tokens on our behalf (to transfer them to the token
 
 ```shell
 cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 erc20 approve \
-    --amount 1000000000000000000 \
+    --amount 100 \
     --erc20Address $SRC_TOKEN \
     --recipient $SRC_HANDLER
 ```
 
-*Note: The amount is given in the smallest denomination (e.g. wei) so this is equivalent to transfering 1 whole token.*
+*Note: Most ERC20 contracts use 18 decimal places. The amount specified will be encoded with the necessary decimal places. This can be configured with `--decimals` on the `erc20` command.*
 
 Execute a deposit.
 
 ```shell
 cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 erc20 deposit \
-    --amount 1000000000000000000 \
+    --amount 100 \
     --dest 1 \
     --bridge $SRC_BRIDGE \
     --recipient $DST_ADDR \
