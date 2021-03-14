@@ -21,7 +21,7 @@ The solidity implementation of ChainBridge should consist of a central Bridge co
 
 4. Upon seeing a `ProposalFinalized` event, Relayers call the`executeDeposit`function on the bridge. `executeDeposit` delegates a call to a handler contract specified by the associated `resourceID`.
 
-5. The specified handler's `executeDeposit` function validates the paramters provided and makes a call to some contract to complete the transfer.
+5. The specified handler's `executeDeposit` function validates the parameters provided and makes a call to some contract to complete the transfer.
 
 
 ## Bridge Contract
