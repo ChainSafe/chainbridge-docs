@@ -186,7 +186,7 @@ docker build -t chainsafe/chainbridge .
 You can start the relayer as a docker container 
 
 ```bash
-docker run -v ./config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest
+docker run -v $(pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest
 ```
 
 ## Fungible Transfers
