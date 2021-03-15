@@ -36,7 +36,7 @@ nav:
   - Testing: test.md
   - Releases:
       - Relayer: https://github.com/ChainSafe/ChainBridge/tags
-      - SmartContracts: https://github.com/ChainSafe/chainbridge-solidity/tags
+      - Solidity: https://github.com/ChainSafe/chainbridge-solidity/tags
 
 
 extra:
