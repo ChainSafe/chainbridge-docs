@@ -4,8 +4,8 @@
 site_name: ChainBridge Docs
 site_description: Modular Multi-Directional Blockchain Bridge to interact with Multiple Networks; Ethereum, Ethereum Classic, Substrate, Cosmos-SDK based chains.
 
-repo_name: chainsafe/chainbridge-docs
-repo_url: https://github.com/ChainSafe/chainbridge-docs
+repo_name: chainsafe/chainbridge
+repo_url: https://github.com/ChainSafe/chainbridge
 
 # Configuration
 markdown_extensions:
