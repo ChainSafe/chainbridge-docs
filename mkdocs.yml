@@ -28,11 +28,14 @@ nav:
     - CLI Options: cli-options.md
   - Specification:
       - ChainBridge: spec.md
-      - Ethereum: chains/ethereum.md
+      - Ethereum:
+        - Bridge Setup: chains/ethereum.md
+        - Contracts: chains/eth-contracts.md
       - Substrate: chains/substrate.md
   - Guides:
     - Running Locally (EVM <-> Substrate): local.md
     - Deploying Live (EVM <-> EVM): live-evm-bridge.md
+  - FAQ: faq.md
   - Testing: test.md
   - Releases:
       - Relayer: https://github.com/ChainSafe/ChainBridge/tags
