@@ -196,7 +196,7 @@ In configuring the destination bridge contract we set the relayer threshold to 1
 #### 1. Build the relayer
 
 ```shell
-git clone -b v1.0.0 --depth 1 https://github.com/ChainSafe/chainbridge \
+git clone -b v1.1.1 --depth 1 https://github.com/ChainSafe/chainbridge \
 && cd chainbridge \
 && make build
 ```
