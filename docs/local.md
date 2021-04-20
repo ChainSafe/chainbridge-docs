@@ -2,7 +2,7 @@
 ## Prerequisites
 
 - Docker, docker-compose
-- chainbridge `v1.0.0` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
+- chainbridge `v1.1.1` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
 - Polkadot JS Portal ([https://portal.chain.centrifuge.io](https://portal.chain.centrifuge.io/))
     - Connect to your local node (below) by clicking in the top-left corner and using `ws://localhost:9944`
     - You will need to setup the type definitions for the chain by selecting `Settings` -> `Developer`
