@@ -1,7 +1,7 @@
 # Running Locally
 ## Prerequisites
 
-- Docker (Note: docker-compose now comes preinstalled with Docker)
+- Docker (**Note:** docker-compose now comes preinstalled with Docker)
 - chainbridge `v1.1.1` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
 - cb-sol-cli (see [README](https://github.com/ChainSafe/chainbridge-deploy/tree/master/cb-sol-cli#cb-sol-cli-documentation))
 
