@@ -33,6 +33,8 @@ Ethereum chains support the following additional options:
     "http": "true",                  // Whether the chain connection is ws or http (default: false)
     "startBlock": "1234",            // The block to start processing events from (default: 0)
     "blockConfirmations": "10"       // Number of blocks to wait before processing a block
+    "egsApiKey": "xxx..."            // API key for Eth Gas Station (https://www.ethgasstation.info/)
+    "egsSpeed": "fast"               // Desired speed for gas price selection, the options are: "average", "fast", "fastest"
 }
 ```
 
