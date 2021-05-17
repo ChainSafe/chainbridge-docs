@@ -1,7 +1,7 @@
 # Running Locally
 ## Prerequisites
 
-- Docker (**Note:** docker-compose now comes preinstalled with Docker)
+- Docker, docker-compose
 - chainbridge `v1.1.1` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
 - cb-sol-cli (see [README](https://github.com/ChainSafe/chainbridge-deploy/tree/master/cb-sol-cli#cb-sol-cli-documentation))
 
@@ -23,7 +23,7 @@
 The easiest way to get started is to use the docker-compose file found [here](https://github.com/ChainSafe/ChainBridge/blob/main/docker-compose-e2e.yml). This will start two geth instances and an instance of chainbridge-substrate-chain:
 
 ```bash
-docker compose -f docker-compose-e2e.yml up -V
+docker-compose -f docker-compose-e2e.yml up -V
 ```
 
 (Use `-V` to always start with new chains. These instructions depend on deterministic Ethereum addresses, which are used as defaults implicitly by some of these commands. Avoid re-deploying the contracts without restarting both chains, or ensure to specify all the required parameters.)
