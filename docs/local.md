@@ -20,10 +20,29 @@
 
 ## Start Local Chains
 
-The easiest way to get started is to use the docker-compose file found [here](https://github.com/ChainSafe/ChainBridge/blob/main/docker-compose-e2e.yml). This will start two geth instances and an instance of chainbridge-substrate-chain:
+The easiest way to get started is to use the below docker-compose snippet:
+```yaml
+# Copyright 2020 ChainSafe Systems
+# SPDX-License-Identifier: LGPL-3.0-only
+
+version: '3'
+services:
+  geth1:
+    image: "chainsafe/chainbridge-geth:20200505131100-5586a65"
+    container_name: geth1
+    ports:
+    - "8545:8545"
+
+  sub-chain:
+    image: "chainsafe/chainbridge-substrate-chain:v1.3.0"
+    container_name: sub-chain
+    command: chainbridge-substrate-chain --dev --alice --ws-external --rpc-external
+    ports:
+    - "9944:9944"
+```
 
 ```bash
-docker-compose -f docker-compose-e2e.yml up -V
+docker-compose -f docker-compose-snippet.yml up -V
 ```
 
 (Use `-V` to always start with new chains. These instructions depend on deterministic Ethereum addresses, which are used as defaults implicitly by some of these commands. Avoid re-deploying the contracts without restarting both chains, or ensure to specify all the required parameters.)
@@ -225,7 +244,7 @@ Sample `config.json`:
   "chains": [
     {
       "name": "eth",
-      "type": "Ethereum",
+      "type": "ethereum",
       "id": "0",
       "endpoint": "ws://localhost:8545",
       "from": "0xff93B45308FD417dF303D6515aB04D9e89a750Ca",
@@ -240,11 +259,13 @@ Sample `config.json`:
     },
     {
       "name": "sub",
-      "type": "Substrate",
+      "type": "substrate",
       "id": "1",
       "endpoint": "ws://localhost:9944",
       "from": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
-      "opts": {}
+      "opts": {
+          "useExtendedCall":"true",
+      }
     }
   ]
 }
