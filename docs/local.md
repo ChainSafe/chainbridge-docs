@@ -20,7 +20,7 @@
 
 ## Start Local Chains
 
-The easiest way to get started is to use the below docker-compose snippet:
+The easiest way to get started is to use the below docker-compose snippet. This will start one geth instance and an instance of chainbridge-substrate-chain:
 ```yaml
 # Copyright 2020 ChainSafe Systems
 # SPDX-License-Identifier: LGPL-3.0-only
