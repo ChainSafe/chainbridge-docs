@@ -33,6 +33,9 @@ In order to provide generality, we need some way to associate some action on a s
 
 All resource IDs are considered to have a Home Chain. The only strict requirements for Resource IDs is that they must be 32 bytes in length and the least significant byte must contain a chain ID. 
 
+Resource IDs are arbitrary, you can use anything you like. The resource ID should be the same on every chain for the same token.  
+One convention is use 0x0...<contract-address><chain-id> to indicate where the token originates from. You would use a different resource ID from each token that is supported, or for any arbitrary action via the generic handler. The format is just a suggestion, and the chain ID included is in reference to the origin chain where the token was first created.
+
 ### Transfer Flow
 
 1. User initiates a transfer on the source chain.
