@@ -43,9 +43,9 @@ services:
     - "9944:9944"
 ```
 
-```zsh
+```bash
 # Start chains
-$ docker-compose -f docker-compose-snippet.yml up -V
+docker-compose -f docker-compose-snippet.yml up -V
 ```
 
 (Use `-V` to always start with new chains. These instructions depend on deterministic Ethereum addresses, which are used as defaults implicitly by some of these commands. Avoid re-deploying the contracts without restarting both chains, or ensure to specify all the required parameters.)
@@ -94,12 +94,12 @@ To deploy the contracts on to the Ethereum chain, run the following:
 
 ```bash
 # Deploy contracts
-$ cb-sol-cli deploy --all --relayerThreshold 1
+cb-sol-cli deploy --all --relayerThreshold 1
 ```
 
 After running, the expected output looks like this:
 
-```zsh
+```bash
 ================================================================
 Url:        http://localhost:8545
 Deployer:   0xff93B45308FD417dF303D6515aB04D9e89a750Ca
@@ -141,13 +141,13 @@ WETC:               Not Deployed
 
 ```bash
 # Register fungible resource ID with erc20 contract
-$ cb-sol-cli bridge register-resource --resourceId "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00" --targetContract "0x21605f71845f372A9ed84253d2D024B7B10999f4"
+cb-sol-cli bridge register-resource --resourceId "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00" --targetContract "0x21605f71845f372A9ed84253d2D024B7B10999f4"
 
 # Register non-fungible resource ID with erc721 contract
-$ cb-sol-cli bridge register-resource --resourceId "0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501" --targetContract "0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31" --handler "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
+cb-sol-cli bridge register-resource --resourceId "0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501" --targetContract "0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31" --handler "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
 
 # Register generic resource ID
-$ cb-sol-cli bridge register-generic-resource --resourceId "0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01" --targetContract "0xc279648CE5cAa25B9bA753dAb0Dfef44A069BaF4" --handler "0x2B6Ab4b880A45a07d83Cf4d664Df4Ab85705Bc07" --hash --deposit "" --execute "store(bytes32)"
+cb-sol-cli bridge register-generic-resource --resourceId "0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01" --targetContract "0xc279648CE5cAa25B9bA753dAb0Dfef44A069BaF4" --handler "0x2B6Ab4b880A45a07d83Cf4d664Df4Ab85705Bc07" --hash --deposit "" --execute "store(bytes32)"
 ```
 
 ### Specify Token Semantics
@@ -158,16 +158,16 @@ For simplicity's sake the following examples only make use of the  `mint/burn` m
 
 ```bash
 # Register the erc20 contract as mintable/burnable
-$ cb-sol-cli bridge set-burn --tokenContract "0x21605f71845f372A9ed84253d2D024B7B10999f4"
+cb-sol-cli bridge set-burn --tokenContract "0x21605f71845f372A9ed84253d2D024B7B10999f4"
 
 # Register the associated handler as a minter
-$ cb-sol-cli erc20 add-minter --minter "0x3167776db165D8eA0f51790CA2bbf44Db5105ADF"
+cb-sol-cli erc20 add-minter --minter "0x3167776db165D8eA0f51790CA2bbf44Db5105ADF"
 
 # Register the erc721 contract as mintable/burnable
-$ cb-sol-cli bridge set-burn --tokenContract "0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31" --handler "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
+cb-sol-cli bridge set-burn --tokenContract "0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31" --handler "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
 
 # Add the handler as a minter
-$ cb-sol-cli erc721 add-minter --minter "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
+cb-sol-cli erc721 add-minter --minter "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
 ```
 
 ## On-Chain Setup (Substrate)
@@ -224,27 +224,27 @@ Steps to run a relayer:
 4. Start relayer as a binary using the default "Alice" key
 
 _Example:_
-```zsh
+```bash
 # Clone repo
-$ git clone git@github.com:ChainSafe/ChainBridge.git
+git clone git@github.com:ChainSafe/ChainBridge.git
 
 # Build ChainBridge and move it to your GOBIN path
-$ cd ChainBridge && make install
+cd ChainBridge && make install
 
 # Run relayer
-$ chainbridge --config config.json --testkey alice --latest
+chainbridge --config config.json --testkey alice --latest
 ```
 
 _Or, if you prefer Docker, steps 2 and 4 can be done as follows:_
 
 1. Build an image first
 2. Start the relayer as a docker container
-```zsh
+```bash
 # Build docker image
-$ docker build -t chainsafe/chainbridge .
+docker build -t chainsafe/chainbridge .
 
 # Start relayer as docker container
-$ docker run -v $(pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest 
+docker run -v (pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest 
 ```
 
 Sample `config.json`:
@@ -297,7 +297,7 @@ You can query the recipients balance on Ethereum with this:
 
 ```bash
 # Query token balance of account: Oxff..750Ca
-$ cb-sol-cli erc20 balance --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
+cb-sol-cli erc20 balance --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
 ```
 
 ### ERC20 ⇒ Substrate Native Token
@@ -306,21 +306,21 @@ If necessary, you can mint some tokens:
 
 ```bash
 # Mint 1000 ERC20 tokens
-$ cb-sol-cli erc20 mint --amount 1000
+cb-sol-cli erc20 mint --amount 1000
 ```
 
 Before initiating the transfer we have to approve the bridge to take ownership of the tokens:
 
 ```bash
 # Approve bridge to assume custody of tokens
-$ cb-sol-cli erc20 approve --amount 1000 --recipient "0x3167776db165D8eA0f51790CA2bbf44Db5105ADF"
+cb-sol-cli erc20 approve --amount 1000 --recipient "0x3167776db165D8eA0f51790CA2bbf44Db5105ADF"
 ```
 
 To initiate a transfer on the Ethereum chain use this command (Note: there will be a 10 block delay before the relayer will process the transfer):
 
 ```bash
 # Transfer 1 token to account: 0xd4..da27d
-$ cb-sol-cli erc20 deposit --amount 1 --dest 1 --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d" --resourceId "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00"
+cb-sol-cli erc20 deposit --amount 1 --dest 1 --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d" --resourceId "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00"
 ```
 
 ## Non-Fungible Transfers
@@ -351,7 +351,7 @@ You can query ownership of tokens on Ethereum with this:
 
 ```bash
 # Query ownership of ERC721 with token ID: 1
-$ cb-sol-cli erc721 owner --id 0x1
+cb-sol-cli erc721 owner --id 0x1
 ```
 
 ### ERC721 ⇒ Substrate NFT
@@ -360,21 +360,21 @@ If necessary, you can mint an ERC-721 token like this:
 
 ```bash
 # Mint ERC721 with token ID: 99
-$ cb-sol-cli erc721 mint --id 0x99
+cb-sol-cli erc721 mint --id 0x99
 ```
 
 Before initiating the transfer, we must approve the bridge to take ownership of the tokens:
 
 ```bash
 # Approve bridge to assume custody of ERC721 with token ID: 99
-$ cb-sol-cli erc721 approve --id 0x99 --recipient "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
+cb-sol-cli erc721 approve --id 0x99 --recipient "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
 ```
 
 Now we can initiate the transfer:
 
 ```bash
 # Transfer ERC721 with token ID: 99 to account: 0xd4..da27d
-$ cb-sol-cli erc721 deposit --id 0x99 --dest 1 --resourceId "0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501" --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
+cb-sol-cli erc721 deposit --id 0x99 --dest 1 --resourceId "0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501" --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
 ```
 
 ## Generic Data Transfer
@@ -396,5 +396,5 @@ You can verify the transfer with this command:
 
 ```bash
 # Verify transfer of hash
-$ cb-sol-cli cent getHash --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
+cb-sol-cli cent getHash --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
 ```
