@@ -44,6 +44,7 @@ services:
 ```
 
 ```zsh
+# Start chains
 $ docker-compose -f docker-compose-snippet.yml up -V
 ```
 
