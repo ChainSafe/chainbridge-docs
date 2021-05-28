@@ -5,7 +5,7 @@
 - chainbridge `v1.1.1` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
 - cb-sol-cli (see [README](https://github.com/ChainSafe/chainbridge-deploy/tree/master/cb-sol-cli#cb-sol-cli-documentation))
 
-# Steps To Get Started
+## Steps To Get Started
 1. [`Start Local Chains`](#start-local-chains)
 2. [`Connect to PolkadotJS Portal`](#connect-to-polkadotjs-portal)
 3. [`Deploy Contracts`](#deploy-contracts)
@@ -20,7 +20,9 @@
 
 ## Start Local Chains
 
-The easiest way to get started is to use the below docker-compose snippet. This will start one geth instance and an instance of chainbridge-substrate-chain:
+The easiest way to get started is to use the below docker-compose snippet. 
+
+This will start one geth instance and an instance of chainbridge-substrate-chain:
 ```yaml
 # Copyright 2020 ChainSafe Systems
 # SPDX-License-Identifier: LGPL-3.0-only
@@ -42,6 +44,7 @@ services:
 ```
 
 ```bash
+# Start chains
 docker-compose -f docker-compose-snippet.yml up -V
 ```
 
@@ -50,13 +53,11 @@ docker-compose -f docker-compose-snippet.yml up -V
 ## Connect to PolkadotJS Portal
 
 1. Access the PolkadotJS Portal for Centrifuge, as an example Substrate chain, [here](https://portal.chain.centrifuge.io/)
-
 2. Connect to your local Substrate chain:
     - Click the network in the top-left corner
     - Select the Development dropdown
     - Set `ws://localhost:9944` as the custom endpoint
     - Click `Switch` to connect
-
 3. Set up type definitions for the chain:
     - Navigate to `Settings`
     - Select the `Developer` tab
@@ -87,12 +88,12 @@ docker-compose -f docker-compose-snippet.yml up -V
 * These can be found found [here](https://github.com/ChainSafe/chainbridge-Substrate-chain#polkadot-js-apps)
 
 ## On-Chain Setup (Ethereum)
-
 ### Deploy Contracts
 
 To deploy the contracts on to the Ethereum chain, run the following:
 
 ```bash
+# Deploy contracts
 cb-sol-cli deploy --all --relayerThreshold 1
 ```
 
@@ -176,6 +177,7 @@ cb-sol-cli erc721 add-minter --minter "0x3f709398808af36ADBA86ACC617FeB7F5B7B193
 First, we need to register the account of the relayer on Substrate (cb-sol-cli deploys contracts with the 5 test keys preloaded). 
 
 Steps to register the relayers:
+
 1. Select the `Sudo` tab in the PolkadotJS Portal
 2. Choose the `addRelayer` method of `chainBridge`
 3. Select **Alice** as the relayer `AccountId`
@@ -183,6 +185,7 @@ Steps to register the relayers:
 ### Register Resources Substrate
 
 Steps to register resources:
+
 1. Select the `Sudo` tab in the PolkadotJS Portal
 2. Call `chainBridge.setResource`, passing both the `Id` and `Method` listed below for each of the transfer types you wish to use
 
@@ -207,35 +210,41 @@ Method:  `0x4578616d706c652e72656d61726b` (utf-8 encoding of "Example.remark")
 ### Whitelist Chains
 
 Steps to whitelist chains:
+
 1. Select the `Sudo` tab in the PolkadotJS Portal
 2. Call `chainBridge.whitelistChain`, specifying `0` for the Ethereum chain ID
 
 ## Run Relayer
 
 Steps to run a relayer:
+
 1. Clone the [ChainBridge repository](https://github.com/ChainSafe/ChainBridge)
 2. Install the ChainBridge binary
-```zsh
-cd ChainBridge && make install
-```
-- This will build ChainBridge and move it to your GOBIN path
-3. Create `config.json` using the below as a sample template
+3. Create `config.json` using the sample provided below as a starting point
 4. Start relayer as a binary using the default "Alice" key
-```zsh
+
+_Example:_
+```bash
+# Clone repo
+git clone git@github.com:ChainSafe/ChainBridge.git
+
+# Build ChainBridge and move it to your GOBIN path
+cd ChainBridge && make install
+
+# Run relayer
 chainbridge --config config.json --testkey alice --latest
 ```
 
-OR
+_Or, if you prefer Docker, steps 2 and 4 can be done as follows:_
 
-If you prefer Docker, steps 2 and 4 can be done as follows:
-
-2. Build an image first
-```zsh
+1. Build an image first
+2. Start the relayer as a docker container
+```bash
+# Build docker image
 docker build -t chainsafe/chainbridge .
-```
-4. Start the relayer as a docker container:
-```zsh
-docker run -v $(pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest
+
+# Start relayer as docker container
+docker run -v (pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest 
 ```
 
 Sample `config.json`:
@@ -277,16 +286,17 @@ Sample `config.json`:
 ### Substrate Native Token ⇒ ERC 20
 
 Steps to transfer an ERC-20 token:
+
 1. Select the `Extrinsics` tab in the PolkadotJS Portal
 2. Call `example.transferNative` with parameters such as these:
-
-- Amount: `1000` **(select `Pico` for units)**
-- Recipient: `0xff93B45308FD417dF303D6515aB04D9e89a750Ca`
-- Dest Id: `0`
+    - Amount: `1000` **(select `Pico` for units)**
+    - Recipient: `0xff93B45308FD417dF303D6515aB04D9e89a750Ca`
+    - Dest Id: `0`
 
 You can query the recipients balance on Ethereum with this:
 
 ```bash
+# Query token balance of account: Oxff..750Ca
 cb-sol-cli erc20 balance --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
 ```
 
@@ -295,18 +305,21 @@ cb-sol-cli erc20 balance --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
 If necessary, you can mint some tokens:
 
 ```bash
+# Mint 1000 ERC20 tokens
 cb-sol-cli erc20 mint --amount 1000
 ```
 
 Before initiating the transfer we have to approve the bridge to take ownership of the tokens:
 
 ```bash
+# Approve bridge to assume custody of tokens
 cb-sol-cli erc20 approve --amount 1000 --recipient "0x3167776db165D8eA0f51790CA2bbf44Db5105ADF"
 ```
 
 To initiate a transfer on the Ethereum chain use this command (Note: there will be a 10 block delay before the relayer will process the transfer):
 
 ```bash
+# Transfer 1 token to account: 0xd4..da27d
 cb-sol-cli erc20 deposit --amount 1 --dest 1 --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d" --resourceId "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00"
 ```
 
@@ -317,26 +330,27 @@ cb-sol-cli erc20 deposit --amount 1 --dest 1 --recipient "0xd43593c715fdd31c6114
 First, you'll need to mint a token.
 
 Steps to mint an ERC-721 token:
+
 1. Select the `Sudo` tab in the PolkadotJS Portal
 2. Call `erc721.mint` with parameters such as these:
-
-- Owner: `Alice`
-- TokenId: `1`
-- Metadata: `""`
+    - Owner: `Alice`
+    - TokenId: `1`
+    - Metadata: `""`
 
 Now the owner of the token can initiate a transfer.
 
 Steps to transfer an ERC-721 token:
+
 1. Select the `Sudo` tab in the PolkadotJS Portal
 2. Call `example.transferErc721` with parameters such as these:
-
-- Recipient: `0xff93B45308FD417dF303D6515aB04D9e89a750Ca`
-- TokenId: `1`
-- DestId: `0`
+    - Recipient: `0xff93B45308FD417dF303D6515aB04D9e89a750Ca`
+    - TokenId: `1`
+    - DestId: `0`
 
 You can query ownership of tokens on Ethereum with this:
 
 ```bash
+# Query ownership of ERC721 with token ID: 1
 cb-sol-cli erc721 owner --id 0x1
 ```
 
@@ -345,22 +359,25 @@ cb-sol-cli erc721 owner --id 0x1
 If necessary, you can mint an ERC-721 token like this:
 
 ```bash
+# Mint ERC721 with token ID: 99
 cb-sol-cli erc721 mint --id 0x99
 ```
 
 Before initiating the transfer, we must approve the bridge to take ownership of the tokens:
 
 ```bash
+# Approve bridge to assume custody of ERC721 with token ID: 99
 cb-sol-cli erc721 approve --id 0x99 --recipient "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E"
 ```
 
 Now we can initiate the transfer:
 
 ```bash
+# Transfer ERC721 with token ID: 99 to account: 0xd4..da27d
 cb-sol-cli erc721 deposit --id 0x99 --dest 1 --resourceId "0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501" --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
 ```
 
-### Generic Data Transfer
+## Generic Data Transfer
 
 To demonstrate a possible use of the generic data transfer, we have a hash registry on Ethereum. We also have a method on the example Substrate chain to emit a hash inside an event, which we can trigger from Ethereum. 
 
@@ -369,14 +386,15 @@ To demonstrate a possible use of the generic data transfer, we have a hash regis
 For this example we will transfer a 32 byte hash to a registry on Ethereum. 
 
 Steps to transfer data to Ethereum:
+
 1. Select the `Extrinsics` tab in the PolkadotJS Portal
 2. Call `example.transferHash` with parameters such as these:
-
-- Hash: `0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730`
-- Dest ID: `0`
+    - Hash: `0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730`
+    - Dest ID: `0`
 
 You can verify the transfer with this command:
 
 ```bash
+# Verify transfer of hash
 cb-sol-cli cent getHash --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
 ```
