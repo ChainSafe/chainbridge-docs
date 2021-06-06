@@ -273,7 +273,7 @@ Sample `config.json`:
       "endpoint": "ws://localhost:9944",
       "from": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
       "opts": {
-          "useExtendedCall":"true",
+          "useExtendedCall":"true"
       }
     }
   ]
