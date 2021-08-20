@@ -1,0 +1,1407 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular Multi-Directional Blockchain Bridge to interact with Multiple Networks; Ethereum, Ethereum Classic, Substrate, Cosmos-SDK based chains.">
+      
+      
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>Running Locally (EVM Substrate) - ChainBridge Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-locally" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ChainBridge Docs" class="md-header__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChainBridge Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Running Locally (EVM <-> Substrate)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/ChainSafe/chainbridge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ChainBridge Docs" class="md-nav__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ChainBridge Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ChainSafe/chainbridge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Configuration
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-options/" class="md-nav__link">
+        CLI Options
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Specification
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Specification" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Specification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spec/" class="md-nav__link">
+        ChainBridge
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      <label class="md-nav__link" for="__nav_4_2">
+        Ethereum
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Ethereum" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/ethereum/" class="md-nav__link">
+        Bridge Setup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/eth-contracts/" class="md-nav__link">
+        Contracts
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/substrate/" class="md-nav__link">
+        Substrate
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Guides
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Running Locally (EVM <-> Substrate)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Running Locally (EVM <-> Substrate)
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-get-started" class="md-nav__link">
+    Steps To Get Started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-local-chains" class="md-nav__link">
+    Start Local Chains
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-to-polkadotjs-portal" class="md-nav__link">
+    Connect to PolkadotJS Portal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-chain-setup-ethereum" class="md-nav__link">
+    On-Chain Setup (Ethereum)
+  </a>
+  
+    <nav class="md-nav" aria-label="On-Chain Setup (Ethereum)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-contracts" class="md-nav__link">
+    Deploy Contracts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-resources-ethereum" class="md-nav__link">
+    Register Resources Ethereum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specify-token-semantics" class="md-nav__link">
+    Specify Token Semantics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-chain-setup-substrate" class="md-nav__link">
+    On-Chain Setup (Substrate)
+  </a>
+  
+    <nav class="md-nav" aria-label="On-Chain Setup (Substrate)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-relayers" class="md-nav__link">
+    Register Relayers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-resources-substrate" class="md-nav__link">
+    Register Resources Substrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelist-chains" class="md-nav__link">
+    Whitelist Chains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-relayer" class="md-nav__link">
+    Run Relayer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fungible-transfers" class="md-nav__link">
+    Fungible Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Fungible Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#substrate-native-token-erc-20" class="md-nav__link">
+    Substrate Native Token ⇒ ERC 20
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erc20-substrate-native-token" class="md-nav__link">
+    ERC20 ⇒ Substrate Native Token
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-fungible-transfers" class="md-nav__link">
+    Non-Fungible Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Fungible Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#substrate-nft-erc721" class="md-nav__link">
+    Substrate NFT ⇒ ERC721
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erc721-substrate-nft" class="md-nav__link">
+    ERC721 ⇒ Substrate NFT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-data-transfer" class="md-nav__link">
+    Generic Data Transfer
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Data Transfer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-data-substrate-eth" class="md-nav__link">
+    Generic Data Substrate ⇒ Eth
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../live-evm-bridge/" class="md-nav__link">
+        Deploying Live (EVM <-> EVM)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test/" class="md-nav__link">
+        Testing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Releases
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Releases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/ChainBridge/tags" class="md-nav__link">
+        Relayer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/chainbridge-solidity/tags" class="md-nav__link">
+        Solidity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-get-started" class="md-nav__link">
+    Steps To Get Started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-local-chains" class="md-nav__link">
+    Start Local Chains
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-to-polkadotjs-portal" class="md-nav__link">
+    Connect to PolkadotJS Portal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-chain-setup-ethereum" class="md-nav__link">
+    On-Chain Setup (Ethereum)
+  </a>
+  
+    <nav class="md-nav" aria-label="On-Chain Setup (Ethereum)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-contracts" class="md-nav__link">
+    Deploy Contracts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-resources-ethereum" class="md-nav__link">
+    Register Resources Ethereum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specify-token-semantics" class="md-nav__link">
+    Specify Token Semantics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-chain-setup-substrate" class="md-nav__link">
+    On-Chain Setup (Substrate)
+  </a>
+  
+    <nav class="md-nav" aria-label="On-Chain Setup (Substrate)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-relayers" class="md-nav__link">
+    Register Relayers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-resources-substrate" class="md-nav__link">
+    Register Resources Substrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelist-chains" class="md-nav__link">
+    Whitelist Chains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-relayer" class="md-nav__link">
+    Run Relayer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fungible-transfers" class="md-nav__link">
+    Fungible Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Fungible Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#substrate-native-token-erc-20" class="md-nav__link">
+    Substrate Native Token ⇒ ERC 20
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erc20-substrate-native-token" class="md-nav__link">
+    ERC20 ⇒ Substrate Native Token
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-fungible-transfers" class="md-nav__link">
+    Non-Fungible Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Fungible Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#substrate-nft-erc721" class="md-nav__link">
+    Substrate NFT ⇒ ERC721
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erc721-substrate-nft" class="md-nav__link">
+    ERC721 ⇒ Substrate NFT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-data-transfer" class="md-nav__link">
+    Generic Data Transfer
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Data Transfer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-data-substrate-eth" class="md-nav__link">
+    Generic Data Substrate ⇒ Eth
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ChainSafe/chainbridge/edit/master/docs/local.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="running-locally">Running Locally<a class="headerlink" href="#running-locally" title="Permanent link">&para;</a></h1>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker, docker-compose</li>
+<li>chainbridge <code>v1.1.1</code> binary (see <a href="https://github.com/chainsafe/chainbridge/#building">README</a>)</li>
+<li>cb-sol-cli (see <a href="https://github.com/ChainSafe/chainbridge-deploy/tree/master/cb-sol-cli#cb-sol-cli-documentation">README</a>)</li>
+</ul>
+<h2 id="steps-to-get-started">Steps To Get Started<a class="headerlink" href="#steps-to-get-started" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#start-local-chains"><code>Start Local Chains</code></a></li>
+<li><a href="#connect-to-polkadotjs-portal"><code>Connect to PolkadotJS Portal</code></a></li>
+<li><a href="#deploy-contracts"><code>Deploy Contracts</code></a></li>
+<li><a href="#register-resources-ethereum"><code>Register Resources Ethereum</code></a></li>
+<li><a href="#specify-token-semantics"><code>Specify Token Semantics</code></a></li>
+<li><a href="#register-relayers"><code>Register Relayers</code></a></li>
+<li><a href="#register-resources-substrate"><code>Register Resources Substrate</code></a></li>
+<li><a href="#whitelist-chains"><code>Whitelist Chains</code></a></li>
+<li><a href="#run-relayer"><code>Run Relayer</code></a></li>
+<li><a href="#fungible-transfers"><code>Fungible Transfers</code></a></li>
+<li><a href="#non-fungible-transfers"><code>Non-Fungible Transfers</code></a></li>
+</ol>
+<h2 id="start-local-chains">Start Local Chains<a class="headerlink" href="#start-local-chains" title="Permanent link">&para;</a></h2>
+<p>The easiest way to get started is to use the below docker-compose snippet. </p>
+<p>This will start one geth instance and an instance of chainbridge-substrate-chain:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Copyright 2020 ChainSafe Systems</span>
+<span class="c1"># SPDX-License-Identifier: LGPL-3.0-only</span>
+
+<span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">geth1</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;chainsafe/chainbridge-geth:20200505131100-5586a65&quot;</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">geth1</span>
+    <span class="nt">ports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;8545:8545&quot;</span>
+
+  <span class="nt">sub-chain</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;chainsafe/chainbridge-substrate-chain:v1.3.0&quot;</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sub-chain</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">chainbridge-substrate-chain --dev --alice --ws-external --rpc-external</span>
+    <span class="nt">ports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;9944:9944&quot;</span>
+</code></pre></div>
+
+<p><em>Start Chains:</em></p>
+<div class="codehilite"><pre><span></span><code>docker-compose -f docker-compose-snippet.yml up -V
+</code></pre></div>
+
+<p>(Use <code>-V</code> to always start with new chains. These instructions depend on deterministic Ethereum addresses, which are used as defaults implicitly by some of these commands. Avoid re-deploying the contracts without restarting both chains, or ensure to specify all the required parameters.)</p>
+<h2 id="connect-to-polkadotjs-portal">Connect to PolkadotJS Portal<a class="headerlink" href="#connect-to-polkadotjs-portal" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Access the PolkadotJS Portal for Centrifuge, as an example Substrate chain, <a href="https://portal.chain.centrifuge.io/">here</a></li>
+<li>Connect to your local Substrate chain:<ul>
+<li>Click the network in the top-left corner</li>
+<li>Select the Development dropdown</li>
+<li>Set <code>ws://localhost:9944</code> as the custom endpoint</li>
+<li>Click <code>Switch</code> to connect</li>
+</ul>
+</li>
+<li>Set up type definitions for the chain:<ul>
+<li>Navigate to <code>Settings</code></li>
+<li>Select the <code>Developer</code> tab</li>
+<li>Paste in the below Type Defintions</li>
+<li>Save</li>
+</ul>
+</li>
+</ol>
+<p><strong>Type Defintions:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;chainbridge::ChainId&quot;</span><span class="p">:</span> <span class="s2">&quot;u8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ChainId&quot;</span><span class="p">:</span> <span class="s2">&quot;u8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ResourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;[u8; 32]&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;DepositNonce&quot;</span><span class="p">:</span> <span class="s2">&quot;u64&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ProposalVotes&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;votes_for&quot;</span><span class="p">:</span> <span class="s2">&quot;Vec&lt;AccountId&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;votes_against&quot;</span><span class="p">:</span> <span class="s2">&quot;Vec&lt;AccountId&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;enum&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;Erc721Token&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;TokenId&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;metadata&quot;</span><span class="p">:</span> <span class="s2">&quot;Vec&lt;u8&gt;&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;TokenId&quot;</span><span class="p">:</span> <span class="s2">&quot;U256&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;Address&quot;</span><span class="p">:</span> <span class="s2">&quot;AccountId&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;LookupSource&quot;</span><span class="p">:</span> <span class="s2">&quot;AccountId&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>These can be found found <a href="https://github.com/ChainSafe/chainbridge-Substrate-chain#polkadot-js-apps">here</a></li>
+</ul>
+<h2 id="on-chain-setup-ethereum">On-Chain Setup (Ethereum)<a class="headerlink" href="#on-chain-setup-ethereum" title="Permanent link">&para;</a></h2>
+<h3 id="deploy-contracts">Deploy Contracts<a class="headerlink" href="#deploy-contracts" title="Permanent link">&para;</a></h3>
+<p>To deploy the contracts on to the Ethereum chain, run the following:</p>
+<p><em>Deploy Contracts:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli deploy --all --relayerThreshold <span class="m">1</span>
+</code></pre></div>
+
+<p>After running, the expected output looks like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">================================================================</span>
+Url:        http://localhost:8545
+Deployer:   0xff93B45308FD417dF303D6515aB04D9e89a750Ca
+Gas Limit:   <span class="m">8000000</span>
+Gas Price:   <span class="m">20000000</span>
+Deploy Cost: <span class="m">0</span>.0
+
+<span class="nv">Options</span>
+<span class="o">=======</span>
+Chain Id:    <span class="m">0</span>
+Threshold:   <span class="m">1</span>
+Relayers:    0xff93B45308FD417dF303D6515aB04D9e89a750Ca,0x8e0a907331554AF72563Bd8D43051C2E64Be5d35,0x24962717f8fA5BA3b931bACaF9ac03924EB475a0,0x148FfB2074A9e59eD58142822b3eB3fcBffb0cd7,0x4CEEf6139f00F9F4535Ad19640Ff7A0137708485
+Bridge Fee:  <span class="m">0</span>
+Expiry:      <span class="m">100</span>
+
+Contract <span class="nv">Addresses</span>
+<span class="o">================================================================</span>
+Bridge:             0x62877dDCd49aD22f5eDfc6ac108e9a4b5D2bD88B
+----------------------------------------------------------------
+Erc20 Handler:      0x3167776db165D8eA0f51790CA2bbf44Db5105ADF
+----------------------------------------------------------------
+Erc721 Handler:     0x3f709398808af36ADBA86ACC617FeB7F5B7B193E
+----------------------------------------------------------------
+Generic Handler:    0x2B6Ab4b880A45a07d83Cf4d664Df4Ab85705Bc07
+----------------------------------------------------------------
+Erc20:              0x21605f71845f372A9ed84253d2D024B7B10999f4
+----------------------------------------------------------------
+Erc721:             0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31
+----------------------------------------------------------------
+Centrifuge Asset:   Not Deployed
+----------------------------------------------------------------
+WETC:               Not <span class="nv">Deployed</span>
+<span class="o">================================================================</span>
+</code></pre></div>
+
+<h3 id="register-resources-ethereum">Register Resources Ethereum<a class="headerlink" href="#register-resources-ethereum" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NOTE:</strong> The below registrations will <strong>not</strong> notify you upon successful completion.</li>
+</ul>
+<p><em>Register fungile resource ID with erc20 contract:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli bridge register-resource --resourceId <span class="s2">&quot;0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00&quot;</span> --targetContract <span class="s2">&quot;0x21605f71845f372A9ed84253d2D024B7B10999f4&quot;</span>
+</code></pre></div>
+
+<p><em>Register non-fungible resource ID with erc721 contract:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli bridge register-resource --resourceId <span class="s2">&quot;0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501&quot;</span> --targetContract <span class="s2">&quot;0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31&quot;</span> --handler <span class="s2">&quot;0x3f709398808af36ADBA86ACC617FeB7F5B7B193E&quot;</span>
+</code></pre></div>
+
+<p><em>Register generic resource ID:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli bridge register-generic-resource --resourceId <span class="s2">&quot;0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01&quot;</span> --targetContract <span class="s2">&quot;0xc279648CE5cAa25B9bA753dAb0Dfef44A069BaF4&quot;</span> --handler <span class="s2">&quot;0x2B6Ab4b880A45a07d83Cf4d664Df4Ab85705Bc07&quot;</span> --hash --deposit <span class="s2">&quot;&quot;</span> --execute <span class="s2">&quot;store(bytes32)&quot;</span>
+</code></pre></div>
+
+<h3 id="specify-token-semantics">Specify Token Semantics<a class="headerlink" href="#specify-token-semantics" title="Permanent link">&para;</a></h3>
+<p>To allow for a variety of use cases, the Ethereum contracts support both the <code>transfer</code> and the <code>mint/burn</code> ERC methods.</p>
+<p>For simplicity's sake the following examples only make use of the  <code>mint/burn</code> method:</p>
+<p><em>Register the erc20 contract as mintable/burnable:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli bridge set-burn --tokenContract <span class="s2">&quot;0x21605f71845f372A9ed84253d2D024B7B10999f4&quot;</span>
+</code></pre></div>
+
+<p><em>Register the associated handler as a minter:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc20 add-minter --minter <span class="s2">&quot;0x3167776db165D8eA0f51790CA2bbf44Db5105ADF&quot;</span>
+</code></pre></div>
+
+<p><em>Register the erc721 contract as mintable/burnable:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli bridge set-burn --tokenContract <span class="s2">&quot;0xd7E33e1bbf65dC001A0Eb1552613106CD7e40C31&quot;</span> --handler <span class="s2">&quot;0x3f709398808af36ADBA86ACC617FeB7F5B7B193E&quot;</span>
+</code></pre></div>
+
+<p><em>Add the handler as a minter:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc721 add-minter --minter <span class="s2">&quot;0x3f709398808af36ADBA86ACC617FeB7F5B7B193E&quot;</span>
+</code></pre></div>
+
+<h2 id="on-chain-setup-substrate">On-Chain Setup (Substrate)<a class="headerlink" href="#on-chain-setup-substrate" title="Permanent link">&para;</a></h2>
+<h3 id="register-relayers">Register Relayers<a class="headerlink" href="#register-relayers" title="Permanent link">&para;</a></h3>
+<p>First, we need to register the account of the relayer on Substrate (cb-sol-cli deploys contracts with the 5 test keys preloaded). </p>
+<p>Steps to register the relayers:</p>
+<ol>
+<li>Select the <code>Sudo</code> tab in the PolkadotJS Portal</li>
+<li>Choose the <code>addRelayer</code> method of <code>chainBridge</code></li>
+<li>Select <strong>Alice</strong> as the relayer <code>AccountId</code></li>
+</ol>
+<h3 id="register-resources-substrate">Register Resources Substrate<a class="headerlink" href="#register-resources-substrate" title="Permanent link">&para;</a></h3>
+<p>Steps to register resources:</p>
+<ol>
+<li>Select the <code>Sudo</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>chainBridge.setResource</code>, passing both the <code>Id</code> and <code>Method</code> listed below for each of the transfer types you wish to use</li>
+</ol>
+<p><strong>Fungible (Native asset):</strong></p>
+<p>Id: <code>0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00</code></p>
+<p>Method: <code>0x4578616d706c652e7472616e73666572</code> (utf-8 encoding of "Example.transfer")</p>
+<p><strong>NonFungible(ERC721):</strong></p>
+<p>Id: <code>0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501</code></p>
+<p>Method: <code>0x4578616d706c652e6d696e745f657263373231</code> (utf-8 encoding of "Example.mint_erc721")</p>
+<p><strong>Generic (Hash Transfer):</strong></p>
+<p>Id: <code>0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01</code></p>
+<p>Method:  <code>0x4578616d706c652e72656d61726b</code> (utf-8 encoding of "Example.remark")</p>
+<h3 id="whitelist-chains">Whitelist Chains<a class="headerlink" href="#whitelist-chains" title="Permanent link">&para;</a></h3>
+<p>Steps to whitelist chains:</p>
+<ol>
+<li>Select the <code>Sudo</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>chainBridge.whitelistChain</code>, specifying <code>0</code> for the Ethereum chain ID</li>
+</ol>
+<h2 id="run-relayer">Run Relayer<a class="headerlink" href="#run-relayer" title="Permanent link">&para;</a></h2>
+<p>Steps to run a relayer:</p>
+<ol>
+<li>Clone the <a href="https://github.com/ChainSafe/ChainBridge">ChainBridge repository</a></li>
+<li>Install the ChainBridge binary</li>
+<li>Create <code>config.json</code> using the sample provided below as a starting point</li>
+<li>Start relayer as a binary using the default "Alice" key</li>
+</ol>
+<p><em>Clone repo:</em></p>
+<div class="codehilite"><pre><span></span><code>git clone git@github.com:ChainSafe/ChainBridge.git
+</code></pre></div>
+
+<p><em>Build ChainBridge and move it to your GOBIN path:</em></p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ChainBridge <span class="o">&amp;&amp;</span> make install
+</code></pre></div>
+
+<p><em>Run relayer</em>:</p>
+<div class="codehilite"><pre><span></span><code>chainbridge --config config.json --testkey alice --latest
+</code></pre></div>
+
+<p><em>Or, if you prefer Docker, steps 2 and 4 can be done as follows:</em></p>
+<p>Build the ChainBridge docker image:</p>
+<div class="codehilite"><pre><span></span><code>docker build -t chainsafe/chainbridge .
+</code></pre></div>
+
+<p>Start the relayer as a docker container:</p>
+<div class="codehilite"><pre><span></span><code>docker run -v <span class="o">(</span><span class="nb">pwd</span><span class="o">)</span>/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest 
+</code></pre></div>
+
+<p>Sample <code>config.json</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;chains&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ethereum&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;ws://localhost:8545&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;from&quot;</span><span class="p">:</span> <span class="s2">&quot;0xff93B45308FD417dF303D6515aB04D9e89a750Ca&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;bridge&quot;</span><span class="p">:</span> <span class="s2">&quot;0x62877dDCd49aD22f5eDfc6ac108e9a4b5D2bD88B&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;erc20Handler&quot;</span><span class="p">:</span> <span class="s2">&quot;0x3167776db165D8eA0f51790CA2bbf44Db5105ADF&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;erc721Handler&quot;</span><span class="p">:</span> <span class="s2">&quot;0x3f709398808af36ADBA86ACC617FeB7F5B7B193E&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;genericHandler&quot;</span><span class="p">:</span> <span class="s2">&quot;0x2B6Ab4b880A45a07d83Cf4d664Df4Ab85705Bc07&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;gasLimit&quot;</span><span class="p">:</span> <span class="s2">&quot;1000000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;maxGasPrice&quot;</span><span class="p">:</span> <span class="s2">&quot;20000000&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;substrate&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;ws://localhost:9944&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;from&quot;</span><span class="p">:</span> <span class="s2">&quot;5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;opts&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;useExtendedCall&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>This is an example config file for a single relayer ("Alice") using the contracts we've deployed.</li>
+</ul>
+<h2 id="fungible-transfers">Fungible Transfers<a class="headerlink" href="#fungible-transfers" title="Permanent link">&para;</a></h2>
+<h3 id="substrate-native-token-erc-20">Substrate Native Token ⇒ ERC 20<a class="headerlink" href="#substrate-native-token-erc-20" title="Permanent link">&para;</a></h3>
+<p>Steps to transfer an ERC-20 token:</p>
+<ol>
+<li>Select the <code>Extrinsics</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>example.transferNative</code> with parameters such as these:<ul>
+<li>Amount: <code>1000</code> <strong>(select <code>Pico</code> for units)</strong></li>
+<li>Recipient: <code>0xff93B45308FD417dF303D6515aB04D9e89a750Ca</code></li>
+<li>Dest Id: <code>0</code></li>
+</ul>
+</li>
+</ol>
+<p>You can query the recipients balance on Ethereum with this:</p>
+<p><em>Query token balance of account: Oxff..750Ca</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc20 balance --address <span class="s2">&quot;0xff93B45308FD417dF303D6515aB04D9e89a750Ca&quot;</span>
+</code></pre></div>
+
+<h3 id="erc20-substrate-native-token">ERC20 ⇒ Substrate Native Token<a class="headerlink" href="#erc20-substrate-native-token" title="Permanent link">&para;</a></h3>
+<p>If necessary, you can mint some tokens:</p>
+<p><em>Mint 1000 ERC20 tokens</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc20 mint --amount <span class="m">1000</span>
+</code></pre></div>
+
+<p>Before initiating the transfer we have to approve the bridge to take ownership of the tokens:</p>
+<p><em>Approve bridge to assume custody of tokens:</em></p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc20 approve --amount <span class="m">1000</span> --recipient <span class="s2">&quot;0x3167776db165D8eA0f51790CA2bbf44Db5105ADF&quot;</span>
+</code></pre></div>
+
+<p>To initiate a transfer on the Ethereum chain use this command (Note: there will be a 10 block delay before the relayer will process the transfer):</p>
+<p><em>Transfer 1 token to account: 0xd4..da27d</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc20 deposit --amount <span class="m">1</span> --dest <span class="m">1</span> --recipient <span class="s2">&quot;0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d&quot;</span> --resourceId <span class="s2">&quot;0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00&quot;</span>
+</code></pre></div>
+
+<h2 id="non-fungible-transfers">Non-Fungible Transfers<a class="headerlink" href="#non-fungible-transfers" title="Permanent link">&para;</a></h2>
+<h3 id="substrate-nft-erc721">Substrate NFT ⇒ ERC721<a class="headerlink" href="#substrate-nft-erc721" title="Permanent link">&para;</a></h3>
+<p>First, you'll need to mint a token.</p>
+<p>Steps to mint an ERC-721 token:</p>
+<ol>
+<li>Select the <code>Sudo</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>erc721.mint</code> with parameters such as these:<ul>
+<li>Owner: <code>Alice</code></li>
+<li>TokenId: <code>1</code></li>
+<li>Metadata: <code>""</code></li>
+</ul>
+</li>
+</ol>
+<p>Now the owner of the token can initiate a transfer.</p>
+<p>Steps to transfer an ERC-721 token:</p>
+<ol>
+<li>Select the <code>Sudo</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>example.transferErc721</code> with parameters such as these:<ul>
+<li>Recipient: <code>0xff93B45308FD417dF303D6515aB04D9e89a750Ca</code></li>
+<li>TokenId: <code>1</code></li>
+<li>DestId: <code>0</code></li>
+</ul>
+</li>
+</ol>
+<p>You can query ownership of tokens on Ethereum with this:</p>
+<p><em>Query ownership of ERC721 with token ID: 1</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc721 owner --id 0x1
+</code></pre></div>
+
+<h3 id="erc721-substrate-nft">ERC721 ⇒ Substrate NFT<a class="headerlink" href="#erc721-substrate-nft" title="Permanent link">&para;</a></h3>
+<p>If necessary, you can mint an ERC-721 token like this:</p>
+<p><em>Mint ERC721 with token ID: 99</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc721 mint --id 0x99
+</code></pre></div>
+
+<p>Before initiating the transfer, we must approve the bridge to take ownership of the tokens:</p>
+<p><em>Approve bridge to assume custody of ERC721 with token ID: 99</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc721 approve --id 0x99 --recipient <span class="s2">&quot;0x3f709398808af36ADBA86ACC617FeB7F5B7B193E&quot;</span>
+</code></pre></div>
+
+<p>Now we can initiate the transfer:</p>
+<p><em>Transfer ERC721 with token ID: 99 to account: 0xd4..da27d</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli erc721 deposit --id 0x99 --dest <span class="m">1</span> --resourceId <span class="s2">&quot;0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501&quot;</span> --recipient <span class="s2">&quot;0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d&quot;</span>
+</code></pre></div>
+
+<h2 id="generic-data-transfer">Generic Data Transfer<a class="headerlink" href="#generic-data-transfer" title="Permanent link">&para;</a></h2>
+<p>To demonstrate a possible use of the generic data transfer, we have a hash registry on Ethereum. We also have a method on the example Substrate chain to emit a hash inside an event, which we can trigger from Ethereum. </p>
+<h3 id="generic-data-substrate-eth">Generic Data Substrate ⇒ Eth<a class="headerlink" href="#generic-data-substrate-eth" title="Permanent link">&para;</a></h3>
+<p>For this example we will transfer a 32 byte hash to a registry on Ethereum. </p>
+<p>Steps to transfer data to Ethereum:</p>
+<ol>
+<li>Select the <code>Extrinsics</code> tab in the PolkadotJS Portal</li>
+<li>Call <code>example.transferHash</code> with parameters such as these:<ul>
+<li>Hash: <code>0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730</code></li>
+<li>Dest ID: <code>0</code></li>
+</ul>
+</li>
+</ol>
+<p>You can verify the transfer with this command:</p>
+<p><em>Verify transfer of hash</em>:</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli cent getHash --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../chains/substrate/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Substrate" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Substrate
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../live-evm-bridge/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying Live (EVM &lt;-&gt; EVM)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Deploying Live (EVM <-> EVM)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ChainSafe/ChainBridge" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>

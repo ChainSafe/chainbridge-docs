@@ -1,0 +1,1157 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular Multi-Directional Blockchain Bridge to interact with Multiple Networks; Ethereum, Ethereum Classic, Substrate, Cosmos-SDK based chains.">
+      
+      
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>ChainBridge - ChainBridge Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chainbridge-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ChainBridge Docs" class="md-header__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChainBridge Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ChainBridge
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/ChainSafe/chainbridge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ChainBridge Docs" class="md-nav__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ChainBridge Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ChainSafe/chainbridge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Configuration
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-options/" class="md-nav__link">
+        CLI Options
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Specification
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Specification" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Specification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ChainBridge
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ChainBridge
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    Definitions
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-id" class="md-nav__link">
+    Chain ID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposit-nonce" class="md-nav__link">
+    Deposit Nonce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-id" class="md-nav__link">
+    Resource ID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-flow" class="md-nav__link">
+    Transfer Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transfer-types" class="md-nav__link">
+    Transfer Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfer Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fungible" class="md-nav__link">
+    Fungible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-fungible" class="md-nav__link">
+    Non-Fungible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic" class="md-nav__link">
+    Generic
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relayer-set" class="md-nav__link">
+    Relayer Set
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    Components
+  </a>
+  
+    <nav class="md-nav" aria-label="Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain" class="md-nav__link">
+    Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message" class="md-nav__link">
+    Message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router" class="md-nav__link">
+    Router
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      <label class="md-nav__link" for="__nav_4_2">
+        Ethereum
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Ethereum" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/ethereum/" class="md-nav__link">
+        Bridge Setup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/eth-contracts/" class="md-nav__link">
+        Contracts
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/substrate/" class="md-nav__link">
+        Substrate
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Guides
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local/" class="md-nav__link">
+        Running Locally (EVM <-> Substrate)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../live-evm-bridge/" class="md-nav__link">
+        Deploying Live (EVM <-> EVM)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test/" class="md-nav__link">
+        Testing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Releases
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Releases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/ChainBridge/tags" class="md-nav__link">
+        Relayer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/chainbridge-solidity/tags" class="md-nav__link">
+        Solidity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    Definitions
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-id" class="md-nav__link">
+    Chain ID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposit-nonce" class="md-nav__link">
+    Deposit Nonce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-id" class="md-nav__link">
+    Resource ID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-flow" class="md-nav__link">
+    Transfer Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transfer-types" class="md-nav__link">
+    Transfer Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfer Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fungible" class="md-nav__link">
+    Fungible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-fungible" class="md-nav__link">
+    Non-Fungible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic" class="md-nav__link">
+    Generic
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relayer-set" class="md-nav__link">
+    Relayer Set
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    Components
+  </a>
+  
+    <nav class="md-nav" aria-label="Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain" class="md-nav__link">
+    Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message" class="md-nav__link">
+    Message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router" class="md-nav__link">
+    Router
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ChainSafe/chainbridge/edit/master/docs/spec.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="chainbridge-specification">ChainBridge Specification<a class="headerlink" href="#chainbridge-specification" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>ChainBridge is a modular multi-directional blockchain bridge to allow data and value transfer between any number of
+ blockchains. This should enable users to specify a destination blockchain from their source chain, and send data to
+  that blockchain for consumption on the destination chain. This could be a token that is locked on ChainA and
+   redeemed on ChainB, or an operation that is executed on a destination chain and initiated on the source chain. The bridge
+    should maintain a set of relayers that are authorized to make &amp; process transfers across the different blockchains. The bridge design should be modular enough that the addition of a new type of transfer should not require a full re-deployment of the suite of tools, rather small modular upgrades.</p>
+<h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h2>
+<h3 id="chain-id">Chain ID<a class="headerlink" href="#chain-id" title="Permanent link">&para;</a></h3>
+<p>Each chain has a unique 8-bit identifier. We presently define the following chain IDs (subject to change):</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Chain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ETH Mainnet</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ETC Mainnet</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Centrifuge Network</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Aragon Chain</td>
+</tr>
+<tr>
+<td>..</td>
+<td>..</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deposit-nonce">Deposit Nonce<a class="headerlink" href="#deposit-nonce" title="Permanent link">&para;</a></h3>
+<p>A nonce must be generated for every transfer to ensure uniqueness. All implementations must track a sequential nonce (unsigned 64-bit integer) for each possible destination chain. This is included as a standard parameter for each transfer. Order is not enforced.</p>
+<h3 id="resource-id">Resource ID<a class="headerlink" href="#resource-id" title="Permanent link">&para;</a></h3>
+<p>In order to provide generality, we need some way to associate some action on a source chain to some action on a destination chain. This may express tokenX on chain A is equivalent to tokenY on chain B, or to simply associate that some action performed on chain A should result in some other action occurring on chain B. </p>
+<p>All resource IDs are considered to have a Home Chain. The only strict requirements for Resource IDs is that they must be 32 bytes in length and the least significant byte must contain a chain ID. </p>
+<p>Resource IDs are arbitrary, you can use anything you like. The resource ID should be the same on every chain for the same token.<br />
+One convention is use 0x0...<contract-address><chain-id> to indicate where the token originates from. You would use a different resource ID from each token that is supported, or for any arbitrary action via the generic handler. The format is just a suggestion, and the chain ID included is in reference to the origin chain where the token was first created.</p>
+<h3 id="transfer-flow">Transfer Flow<a class="headerlink" href="#transfer-flow" title="Permanent link">&para;</a></h3>
+<ol>
+<li>User initiates a transfer on the source chain.</li>
+<li>Relayers observing the chain parse the parameters of the transfer and format them into a message.</li>
+<li>The message is parsed and then proposed on the destination chain.</li>
+<li>If the vote threshold is met, the proposal will be executed to finalize the transfer.</li>
+</ol>
+<p>After the initiation, a user should not be required to make any additional interactions.</p>
+<h2 id="transfer-types">Transfer Types<a class="headerlink" href="#transfer-types" title="Permanent link">&para;</a></h2>
+<p>In a effort to balance the goals of allowing simple integration and proving generalized transfers, multiple transfer types are defined. Some or all of these may implemented for a chain.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FungibleTransfer</td>
+<td>Transfer of fungible assets</td>
+</tr>
+<tr>
+<td>NonFungibleTransfer</td>
+<td>Transfer of non-fungible assets</td>
+</tr>
+<tr>
+<td>GenericTransfer</td>
+<td>Transfer of arbitrary data</td>
+</tr>
+</tbody>
+</table>
+<p>All transfers contain a source chain, destination chain, deposit nonce, resource ID and transfer-specific parameters.</p>
+<h3 id="fungible">Fungible<a class="headerlink" href="#fungible" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amount</td>
+<td>256 bit uint</td>
+<td>The total number of assets being transferred</td>
+</tr>
+<tr>
+<td>Recipient</td>
+<td>32 bytes</td>
+<td>The recipient address on the destination chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="non-fungible">Non-Fungible<a class="headerlink" href="#non-fungible" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Token ID</td>
+<td>256 bit uint</td>
+<td>The unique identifier for the NFT</td>
+</tr>
+<tr>
+<td>Recipient</td>
+<td>32 bytes</td>
+<td>The recipient address on the destination chain</td>
+</tr>
+<tr>
+<td>Metadata</td>
+<td>variable sized bytes</td>
+<td>Any additional data associated to the NFT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generic">Generic<a class="headerlink" href="#generic" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Metadata</td>
+<td>variable sized bytes</td>
+<td>An opaque payload to transmit</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: Addresses are limited to 32bytes in size, but may be smaller. They must always be compatible with the destination chain.</em></p>
+<h2 id="relayer-set">Relayer Set<a class="headerlink" href="#relayer-set" title="Permanent link">&para;</a></h2>
+<p>Each chain implementation must track a set of relayers, and allow updating of the set as necessary. A threshold should also be maintained to define how many relayers must vote for a proposed transfer before is can be executed. For this initial implementation, the relayer set may be controlled by a single party. Multi-signature wallets can be used to distribute risk, if available on the chain.</p>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<p>This sections defines the specifics of the ChainBridge implementation and the requirements for a chain integration.</p>
+<h3 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h3>
+<h4 id="chain">Chain<a class="headerlink" href="#chain" title="Permanent link">&para;</a></h4>
+<p>A chain is loosely defined as consisting of three major components:</p>
+<ul>
+<li><strong>Connection</strong>:
+A container for on chain interactions. Shared by the listener and writer.</li>
+<li><strong>Listener</strong>: 
+Observes chain state transitions to watch for initiated transfers. When a transfer is encountered it should construct a message and pass it to the router.</li>
+<li><strong>Writer</strong>:
+Responsible for performing on-chain actions. This will parse a proposed transfer from a message and enact it on-chain. </li>
+</ul>
+<p>These vary considerably depending on the chain. As long as the on-chain components are compatible, following the internal message protocol should be sufficient to be compatible with the system. These components are intended for architectural guidance and are only loosely constrained.</p>
+<h4 id="message">Message<a class="headerlink" href="#message" title="Permanent link">&para;</a></h4>
+<p>A message represents a single transfer and its associated parameters. </p>
+<div class="codehilite"><pre><span></span><code><span class="kd">type</span> <span class="nx">Message</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Source</span>       <span class="nx">ChainId</span>   
+    <span class="nx">Destination</span>  <span class="nx">ChainId</span> 
+    <span class="nx">Type</span>         <span class="nx">TransferType</span>
+    <span class="nx">DepositNonce</span> <span class="nx">Nonce</span>
+    <span class="nx">ResourceId</span>   <span class="nx">ResourceId</span>
+    <span class="nx">Payload</span>      <span class="p">[]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The <code>payload</code> field contains the data for the specific transfer, as defined <a href="#transfer-types">above</a>.</p>
+<h4 id="router">Router<a class="headerlink" href="#router" title="Permanent link">&para;</a></h4>
+<p>The router is responsible for taking messages from a source chain and routing them to their destination chain.</p>
+<p>The router provides an interface to allow Listeners to submit constructed messages:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">type</span> <span class="nx">Router</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nx">Send</span><span class="p">(</span><span class="nx">message</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span> <span class="kt">error</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>All chains must fulfill a Writer interface to receive messages from the router:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">type</span> <span class="nx">Writer</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nx">ResolveMessage</span><span class="p">(</span><span class="nx">message</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span> <span class="kt">bool</span>
+<span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../cli-options/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CLI Options" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              CLI Options
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../chains/ethereum/" class="md-footer__link md-footer__link--next" aria-label="Next: Bridge Setup" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Bridge Setup
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ChainSafe/ChainBridge" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>
