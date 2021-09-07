@@ -24,9 +24,9 @@ Ethereum chains support the following additional options:
 ```
 {
     "bridge": "0x12345...",          // Address of the bridge contract (required)
-    "erc20Handler": "0x1234...",     // Address of erc20 handler (required)
-    "erc721Handler": "0x1234...",    // Address of erc721 handler (required)
-    "genericHandler": "0x1234...",   // Address of generic handler (required)
+    "erc20Handler": "0x1234...",     // Address of erc20 handler
+    "erc721Handler": "0x1234...",    // Address of erc721 handler
+    "genericHandler": "0x1234...",   // Address of generic handler
     "maxGasPrice": "0x1234",         // Gas price for transactions (default: 20000000000)
     "gasLimit": "0x1234",            // Gas limit for transactions (default: 6721975)
     "gasMultiplier": "1.25",         // Multiplies the gas price by the supplied value (default: 1)
@@ -65,6 +65,6 @@ To use secure keys, see `chainbridge accounts --help`. The keystore password can
 
 To import external ethereum keys, such as those generated with geth, use `chainbridge accounts import --ethereum /path/to/key`.
 
-To import private keys as keystores, use `chainbridge account import --privateKey key`.
+To import private keys as keystores, use `chainbridge accounts import --privateKey key`.
 
 For testing purposes, chainbridge provides 5 test keys. The can be used with `--testkey <name>`, where `name` is one of `Alice`, `Bob`, `Charlie`, `Dave`, or `Eve`. 
