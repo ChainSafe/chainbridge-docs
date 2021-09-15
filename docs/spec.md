@@ -3,25 +3,23 @@
 ## Summary
 
 ChainBridge is a modular multi-directional blockchain bridge to allow data and value transfer between any number of
- blockchains. This should enable users to specify a destination blockchain from their source chain, and send data to
-  that blockchain for consumption on the destination chain. This could be a token that is locked on ChainA and
-   redeemed on ChainB, or an operation that is executed on a destination chain and initiated on the source chain. The bridge
-    should maintain a set of relayers that are authorized to make & process transfers across the different blockchains. The bridge design should be modular enough that the addition of a new type of transfer should not require a full re-deployment of the suite of tools, rather small modular upgrades.
+blockchains. This should enable users to specify a destination blockchain from their source chain, and send data to
+that blockchain for consumption on the destination chain. This could be a token that is locked on ChainA and
+redeemed on ChainB, or an operation that is executed on a destination chain and initiated on the source chain. The bridge
+should maintain a set of relayers that are authorized to make & process transfers across the different blockchains. The bridge design should be modular enough that the addition of a new type of transfer should not require a full re-deployment of the suite of tools, rather small modular upgrades.
 
 
 ## Definitions
 
-### Chain ID
+### Domain ID
 
-Each chain has a unique 8-bit identifier. We presently define the following chain IDs (subject to change):
+Each chain has a unique 8-bit identifier we refer to as the domain ID. 
 
-| ID | Chain |
-| - | - |
-| 0 | ETH Mainnet |
-| 1 | ETC Mainnet |
-| 2 | Centrifuge Network |
-| 3 | Aragon Chain |
-| .. | .. |
+Note: this number is arbitrary, but must remain consistent when in use for a specific chain; each chain's domain ID must be unique to that chain.
+
+ChainA: 0
+ChainB: 1
+ChainC: 2
 
 ### Deposit Nonce
 
@@ -31,10 +29,10 @@ A nonce must be generated for every transfer to ensure uniqueness. All implement
 
 In order to provide generality, we need some way to associate some action on a source chain to some action on a destination chain. This may express tokenX on chain A is equivalent to tokenY on chain B, or to simply associate that some action performed on chain A should result in some other action occurring on chain B. 
 
-All resource IDs are considered to have a Home Chain. The only strict requirements for Resource IDs is that they must be 32 bytes in length and the least significant byte must contain a chain ID. 
+All resource IDs are considered to have a Home Chain. The only strict requirements for Resource IDs is that they must be 32 bytes in length and the least significant byte must contain a domain ID. 
 
 Resource IDs are arbitrary, you can use anything you like. The resource ID should be the same on every chain for the same token.  
-One convention is use 0x0...<contract-address><chain-id> to indicate where the token originates from. You would use a different resource ID from each token that is supported, or for any arbitrary action via the generic handler. The format is just a suggestion, and the chain ID included is in reference to the origin chain where the token was first created.
+One convention is use 0x0...<contract-address><domain-id> to indicate where the token originates from. You would use a different resource ID from each token that is supported, or for any arbitrary action via the generic handler. The format is just a suggestion, and the chain ID included is in reference to the origin chain where the token was first created.
 
 ### Transfer Flow
 

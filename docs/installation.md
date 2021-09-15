@@ -1,42 +1,69 @@
 # Installation
 
-## Dependencies
+[ToC]
 
-- [Subkey](https://github.com/paritytech/substrate): 
-Used for substrate key management. Only required if connecting to a substrate chain.
+Before anything further can be done, we need to download some necessary software.
 
+### ChainBridge Binary
+_In this step, we will build the ChainBridge-Core-Example binary._
+
+_This binary will function as the bridge remote control, so-to-speak, and is designed to showcase compatibility of our core bridge code alongside network-specific modules._
+
+For this example, the binary includes the following components:
+1. **Core:** general code necessary to operating the bridge
+2. **Celo-Module:** the Celo-specific code
+3. **EVM-Module:** the EVM-specific code
+
+*If you wish to bridge different networks other than the example provided, simply clone the [ChainBridge-Core-Example repository](https://github.com/ChainSafe/chainbridge-core-example.git), checkout one of the other pre-configured branches (e.g. evm-evm, evm-substrate), and then follow the instructions provided in the `Makefile` to install the binary.*
+
+#### Clone Repository
+_Navigate to the ChainBridge-Core-Example repo in GitHub and clone it._
+
+```bash
+git clone https://github.com/ChainSafe/chainbridge-core-example.git
 ```
-make install-subkey
+
+#### Checkout Pre-configured Branch
+
+_Now we will `cd` into the chainbridge-core-example repo and checkout a pre-configured branch for the networks we are wishing to bridge._
+
+##### Since we are bridging Celo and Ethereum, we will use the `celo-evm-dev` branch.
+
+```bash
+cd chainbridge-core-example && git checkout celo-evm-dev
 ```
 
+#### Build Binary
+_Once the branch is checked out, we will build the binary from the source._
 
-## Building from Source
-
-To build `chainbridge` in `./build`.
-```
+```bash
 make build
 ```
 
-**or**
-
-Use`go install` to add `chainbridge` to your GOBIN.
-
-```
-make install
+#### Run Binary
+_To ensure everything downloaded correctly and will work on your system, try executing the ChainBridge-Core-Example binary and print the help instructions._
+```bash
+./chainbridge-core-example -h
 ```
 
-## Docker
+#### Output
+_Below is a proper output of the CLI help screen._ 
 
-The official ChainBridge Docker image can be found [here](https://hub.docker.com/r/chainsafe/chainbridge).
+```bash
+Usage:
+   [command]
 
-To build the Docker image locally run: 
+Available Commands:
+  celo-cli    Celo CLI
+  completion  generate the autocompletion script for the specified shell
+  evm-cli     EVM CLI
+  help        Help about any command
+  run         Run example app
 
+Flags:
+  -h, --help   help for this command
+
+Use " [command] --help" for more information about a command.
 ```
-docker build -t chainsafe/chainbridge .
-```
 
-To start ChainBridge:
-
-```
-docker run -v $(pwd)/config.json:/config.json chainsafe/chainbridge
-```
+##### If any part of the installation fails or if the instructions are unclear, feel free to reach out to us directly via our shared Slack channel for assistance.
