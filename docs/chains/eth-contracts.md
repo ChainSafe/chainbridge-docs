@@ -4,7 +4,7 @@
 
 Users and relayers will interact with the `Bridge` contract. This delegates calls to the handler contracts for deposits and executing proposals.
 
-```
+```text
 function deposit (uint8 destinationChainID, bytes32 resourceID, bytes calldata data)
 ```
 
@@ -13,12 +13,13 @@ function deposit (uint8 destinationChainID, bytes32 resourceID, bytes calldata d
 To provide modularity and break out the necessary contract logic, the implementation uses a notion of handlers. A handler is defined for ERC20, ERC721 and generic transfers. These map directly to the Fungible, Non-Fungible, and generic transfer types.
 
 A handler must fulfill two interfaces:
-```
+
+```text
 // Will be called by the bridge contract to initiate a transfer
 function deposit(uint8 destinationChainID, uint64 depositNonce, address depositer, bytes calldata data)
 ```
 
-```
+```text
 // TODO: This would be more aptly named executeProposal
 // Called by the bridge contract to complete a transfer
 function executeDeposit(bytes calldata data)
@@ -34,23 +35,23 @@ These handlers are responsible for transferring ERC assets. They should provide 
 
 Different configurations may require different interface interactions. For example, it may make sense to mint and burn a token that is originally from another chain. If supply needs to be controlled, transferring tokens in and out of a reserve may be desired instead. To support either case handlers should associate each resource ID/token contract with one of these:
 
-- `transferFrom()` - The user approves the handler to move the tokens prior to initiating the transfer. The handler will call `transferFrom()` as part of the transfer initiation. For the inverse, the handler will call `transfer()` to release tokens from the handlers ownership.
-- `mint()`/`burn()` - The user approves the handler to move the tokens prior to initiating the transfer. The handler will call `burnFrom()` as part of the transfer initiation. For the inverse, the handler will call `mint()` to release tokens to the recipient (and must have privileges to do so).
-
+* `transferFrom()` - The user approves the handler to move the tokens prior to initiating the transfer. The handler will call `transferFrom()` as part of the transfer initiation. For the inverse, the handler will call `transfer()` to release tokens from the handlers ownership.
+* `mint()`/`burn()` - The user approves the handler to move the tokens prior to initiating the transfer. The handler will call `burnFrom()` as part of the transfer initiation. For the inverse, the handler will call `mint()` to release tokens to the recipient \(and must have privileges to do so\).
 
 ### ERC20 Handler
 
 #### Calldata for `deposit()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | Amount | uint256 | 0 - 31 |
 | Recipient Address Length | uint256 | 32 - 63 |
 | Recipient Address | bytes | 63 - END |
 
-
 #### Calldata for `executeDeposit()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | Amount | uint256 | 0 - 31 |
 | Recipient Address Length | uint256 | 32 - 63 |
 | Recipient Address | bytes | 64 - END |
@@ -59,25 +60,25 @@ Different configurations may require different interface interactions. For examp
 
 #### Metadata
 
-The `tokenURI` should be used as the `metadata` field if the contract supports the Metadata extension (interface ID `0x5b5e139f`).
-
+The `tokenURI` should be used as the `metadata` field if the contract supports the Metadata extension \(interface ID `0x5b5e139f`\).
 
 #### Calldata for `deposit()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | TokenID | uint256 | 0 - 31 |
 | Recipient Address Length | uint256 | 32 - 63 |
 | Recipient Address | bytes | 63 - END |
 
 #### Calldata for `executeDeposit()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | TokenID | uint256 | 0 - 31 |
 | Recipient Address Length | uint256 | 32 - 63 |
 | Recipient Address | bytes | 64 - 95 |
 | Metadata Length | uint256 | 96 - 127 |
 | Metadata | bytes | 128 - END |
-
 
 ### Generic Handler
 
@@ -88,25 +89,27 @@ As well as associating a resource ID to a contract address, the generic handler 
 
 #### Deposit
 
-In a generic context, a deposit is simply the initiation of a transfer of a piece of data. To (optionally) allow this data to be validated for transfer the deposit mechanism should pass the data to a specified function and proceed with the transfer if the call succeeds (ie. does not revert). A function selector of `0x00` should skip the deposit function call.
+In a generic context, a deposit is simply the initiation of a transfer of a piece of data. To \(optionally\) allow this data to be validated for transfer the deposit mechanism should pass the data to a specified function and proceed with the transfer if the call succeeds \(ie. does not revert\). A function selector of `0x00` should skip the deposit function call.
 
 #### Execute
 
 An execution function must be specified. When `executeDeposit()` is called on the handler it should pass the `metadata` field to the specified function.
 
-
 #### Calldata for `deposit()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | Metadata Length | uint256 | 0 - 31 |
 | Metadata | bytes | 32 - END |
 
 #### Calldata for `execute()`
+
 | Data | Type | Location |
-| - | - | - |
+| :--- | :--- | :--- |
 | Metadata Length | uint256 | 0 - 31 |
 | Metadata | bytes | 32 - END |
 
 ## Administration
 
 The contracts should be controlled by an admin account. This should control the relayer set, manage the resource IDs, and specify the handlers. It should also be able to pause and unpause transfers at any times.
+

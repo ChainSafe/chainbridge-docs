@@ -1,0 +1,21 @@
+# Table of contents
+
+* [chainbridge-docs](README.md)
+* [docs](docs/README.md)
+  * [🌉  Overview](docs/index.md)
+  * [Installation](docs/installation.md)
+  * [Configuration](docs/configuration.md)
+  * [Bridge Administrator and Node Endpoints](docs/bridge-admin-node-endpoints.md)
+  * [Transfer and Query Balances](docs/transfer-and-balances.md)
+  * [Relayers](docs/relayers.md)
+  * [Specification](docs/spec.md)
+  * [Metrics](docs/metrics.md)
+  * [CLI Options](docs/relayer.md)
+  * [Chains](docs/chains/README.md)
+    * [Ethereum Contracts](docs/chains/eth-contracts.md)
+    * [Ethereum Implementation Specification](docs/chains/ethereum.md)
+    * [Substrate Implementation Specification](docs/chains/substrate.md)
+  * [Guides](docs/guides/README.md)
+    * [Deployment Guide](docs/guides/deployment-guide.md)
+  * [FAQ](docs/faq.md)
+

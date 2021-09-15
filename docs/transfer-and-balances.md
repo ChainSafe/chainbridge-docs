@@ -1,18 +1,16 @@
 # Transfer and Query Balances
 
-## Transfer: NetworkA > NetworkB
+## Transfer: NetworkA &gt; NetworkB
 
-*Let's transfer some tokens from NetworkA (ETH) to NetworkB (CELO).*
+_Let's transfer some tokens from NetworkA \(ETH\) to NetworkB \(CELO\)._
 
 ### Approve Tokens For Transfer
 
-*First, we must approve the ERC20 contract address to allow for a specified amount of token to be transferred by the provided recipient address.*
+_First, we must approve the ERC20 contract address to allow for a specified amount of token to be transferred by the provided recipient address._
 
-*In this case, we're going to be approving 100 tokens to be transferred by the ERC20 handler contract.*
+_In this case, we're going to be approving 100 tokens to be transferred by the ERC20 handler contract._
 
-Flags:
-1. **recipient:** the ERC20 Handler contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **erc20address:** the ERC20 contract from the [deployed contract table](#Deployed-Contract-Table) 
+Flags: 1. **recipient:** the ERC20 Handler contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **erc20address:** the ERC20 contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table)
 
 ```bash
 ./chainbridge-core-example \
@@ -29,12 +27,9 @@ approve \
 
 ### Transfer Tokens
 
-*In this step, we're going to be transferring 1 ERC20 token.*
+_In this step, we're going to be transferring 1 ERC20 token._
 
-Flags:
-1. **bridge:** the bridge contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **recipient:** the address to receive the tokens
-3. **resourceId:** the resource ID from the [deployed contract table](#Deployed-Contract-Table) 
+Flags: 1. **bridge:** the bridge contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **recipient:** the address to receive the tokens 3. **resourceId:** the resource ID from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table)
 
 ```bash
 ./chainbridge-core-example \
@@ -51,19 +46,17 @@ deposit \
 --decimals 18
 ```
 
-## Transfer: NetworkB > NetworkA
+## Transfer: NetworkB &gt; NetworkA
 
-*Let's transfer some tokens from NetworkB (CELO) to NetworkA (ETH).*
+_Let's transfer some tokens from NetworkB \(CELO\) to NetworkA \(ETH\)._
 
 ### Approve Tokens For Transfer
 
-*Just as in the above case, we must approve the ERC20 contract address to allow for a specified amount of token to be transferred by the provided recipient address.*
+_Just as in the above case, we must approve the ERC20 contract address to allow for a specified amount of token to be transferred by the provided recipient address._
 
-*We're going to be approving 100 tokens to be transferred by the ERC20 handler contract.*
+_We're going to be approving 100 tokens to be transferred by the ERC20 handler contract._
 
-Flags:
-1. **recipient:** the ERC20 Handler contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **erc20address:** the ERC20 contract from the [deployed contract table](#Deployed-Contract-Table) 
+Flags: 1. **recipient:** the ERC20 Handler contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **erc20address:** the ERC20 contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table)
 
 ```bash
 ./chainbridge-core-example \
@@ -80,12 +73,9 @@ approve \
 
 ### Transfer Tokens
 
-*In this step, we're going to be transferring 100 ERC20 tokens.*
+_In this step, we're going to be transferring 100 ERC20 tokens._
 
-Flags:
-1. **bridge:** the bridge contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **recipient:** the address to receive the tokens
-3. **resourceId:** the resource ID from the [deployed contract table](#Deployed-Contract-Table) 
+Flags: 1. **bridge:** the bridge contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **recipient:** the address to receive the tokens 3. **resourceId:** the resource ID from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table)
 
 ```bash
 ./chainbridge-core-example \
@@ -104,16 +94,13 @@ deposit \
 
 ## Query Balances
 
-*Query balance of an account from an ERC20 contract.*
+_Query balance of an account from an ERC20 contract._
 
 ### NetworkA
 
-*In this step we'll query the specific ERC20 token balance of an Ethereum address on NetworkA.*
+_In this step we'll query the specific ERC20 token balance of an Ethereum address on NetworkA._
 
-Flags:
-1. **erc20address:** the ERC20 contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **accountAddress:** the address who's balance we wish to know
-
+Flags: 1. **erc20address:** the ERC20 contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **accountAddress:** the address who's balance we wish to know
 
 ```bash
 ./chainbridge-core-example \
@@ -127,11 +114,9 @@ balance \
 
 ### NetworkB
 
-*Now, we'll query the specific ERC20 token balance of an Ethereum address on NetworkB.*
+_Now, we'll query the specific ERC20 token balance of an Ethereum address on NetworkB._
 
-Flags:
-1. **erc20address:** the ERC20 contract from the [deployed contract table](#Deployed-Contract-Table)
-2. **accountAddress:** the address who's balance we wish to know
+Flags: 1. **erc20address:** the ERC20 contract from the [deployed contract table](transfer-and-balances.md#Deployed-Contract-Table) 2. **accountAddress:** the address who's balance we wish to know
 
 ```bash
 ./chainbridge-core-example \
@@ -142,3 +127,4 @@ balance \
 --erc20Address 0x0 \
 --accountAddress 0x284D2Cb760D5A952f9Ea61fd3179F98a2CbF0B3E
 ```
+

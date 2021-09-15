@@ -1,8 +1,9 @@
 # Deployment Guide
 
-In this guide, we're going to walk through the details of deploying a bridge between NetworkA (ETH) and NetworkB (CELO).
+In this guide, we're going to walk through the details of deploying a bridge between NetworkA \(ETH\) and NetworkB \(CELO\).
 
 ## Overview
+
 [Overview](../index.md)
 
 ## Getting started
@@ -24,10 +25,12 @@ Before anything further can be done, we need to download and install some necess
 [Smart Contracts](../chains/eth-contracts.md)
 
 ### Deployed Contract Table
+
 _This is a digest of the contracts needed for the ChainBridge to operate._
 
 **Keep note of these addresses as we will use them throughout the guide.**
-```
+
+```text
 NetworkA: ChainID: 1
 ================================================================
 Bridge:             0x0 (TBD)
@@ -46,21 +49,20 @@ Erc20 Handler:      0x0 (TBD)
 ----------------------------------------------------------------
 Erc20:              0x0 (TBD)
 
-ResourceID: 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500 
+ResourceID: 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500
 ```
-*^The ResourceID shown above provides us with a way to associate some action on a source chain to some action on a destination chain.*
 
-*More about ResourceIDs [here](../spec.md#resource-id).*
+_^The ResourceID shown above provides us with a way to associate some action on a source chain to some action on a destination chain._
 
-## Preparations: NetworkA (ETH)
+_More about ResourceIDs_ [_here_](../spec.md#resource-id)_._
+
+## Preparations: NetworkA \(ETH\)
 
 ### Deploy Bridge, ERC20 and ERC20 Handler Contracts
 
-*Deploy all of the contracts required for bridging*
+_Deploy all of the contracts required for bridging_
 
-**Notable flags:**
-1. **relayerThreshold:** a relayer threshold of 2 (meaning 2 votes are required for a proposal to pass)
-2. **relayers:** a string list of our relayer addresses (from above)
+**Notable flags:** 1. **relayerThreshold:** a relayer threshold of 2 \(meaning 2 votes are required for a proposal to pass\) 2. **relayers:** a string list of our relayer addresses \(from above\)
 
 ```bash
 ./chainbridge-core-example \
@@ -76,7 +78,7 @@ deploy \
 
 ### Register Resource
 
-*Register a resource ID with a contract address for a handler*
+_Register a resource ID with a contract address for a handler_
 
 ```bash
 ./chainbridge-core-example \
@@ -95,7 +97,7 @@ register-resource \
 
 ### Set ERC20 as Mintable/Burnable
 
-*This sets an ERC-20 handler as burnable*
+_This sets an ERC-20 handler as burnable_
 
 ```bash
 ./chainbridge-core-example \
@@ -111,7 +113,7 @@ set-burn \
 
 ### Add Minter
 
-*This sets an ERC-20 handler as mintable*
+_This sets an ERC-20 handler as mintable_
 
 ```bash
 ./chainbridge-core-example \
@@ -126,7 +128,7 @@ add-minter \
 
 ### Mint Tokens
 
-*Mint ERC-20 tokens*
+_Mint ERC-20 tokens_
 
 ```bash
 ./chainbridge-core-example \
@@ -139,15 +141,13 @@ mint \
 --erc20Address 0x0
 ```
 
-## Preparations: NetworkB (CELO)
+## Preparations: NetworkB \(CELO\)
 
 ### Deploy Bridge, ERC20 and ERC20 Handler Contracts
 
-*Deploy all of the contracts required for bridging*
+_Deploy all of the contracts required for bridging_
 
-**Notable flags:**
-1. **relayerThreshold:** a relayer threshold of 2 (meaning 2 votes are required for a proposal to pass)
-2. **relayers:** a string list of our relayer addresses (from above)
+**Notable flags:** 1. **relayerThreshold:** a relayer threshold of 2 \(meaning 2 votes are required for a proposal to pass\) 2. **relayers:** a string list of our relayer addresses \(from above\)
 
 ```bash
 ./chainbridge-core-example \
@@ -163,7 +163,7 @@ deploy \
 
 ### Register Resource
 
-*Register a resource ID with a contract address for a handler*
+_Register a resource ID with a contract address for a handler_
 
 ```bash
 ./chainbridge-core-example \
@@ -182,7 +182,7 @@ register-resource \
 
 ### Set ERC20 as Mintable/Burnable
 
-*This sets an ERC-20 handler as burnable*
+_This sets an ERC-20 handler as burnable_
 
 ```bash
 ./chainbridge-core-example \
@@ -198,7 +198,7 @@ set-burn \
 
 ### Add Minter
 
-*This sets an ERC-20 handler as mintable*
+_This sets an ERC-20 handler as mintable_
 
 ```bash
 ./chainbridge-core-example \
@@ -213,7 +213,7 @@ add-minter \
 
 ### Mint Tokens
 
-*Mint ERC-20 tokens*
+_Mint ERC-20 tokens_
 
 ```bash
 ./chainbridge-core-example \
@@ -225,3 +225,4 @@ mint \
 --amount 10 \
 --erc20Address 0x0
 ```
+
