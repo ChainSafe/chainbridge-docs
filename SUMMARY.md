@@ -19,10 +19,4 @@
   * [FAQ](docs/faq.md)
   * [Relayers](docs/relayers.md)
   * [Specification](docs/spec.md)
-* [.github](.github/README.md)
-  * [ISSUE\_TEMPLATE](.github/issue_template/README.md)
-    * [backlog-item](.github/issue_template/backlog-item.md)
-    * [bug\_report](.github/issue_template/bug_report.md)
-    * [feature-request-or-epic](.github/issue_template/feature-request-or-epic.md)
-  * [pull\_request\_template](.github/pull_request_template.md)
 
