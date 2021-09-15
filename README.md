@@ -1,2 +1,0 @@
-# chainbridge-docs
-
