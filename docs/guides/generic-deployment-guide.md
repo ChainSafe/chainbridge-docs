@@ -21,7 +21,7 @@ Before anything further can be done, we need to download and install some necess
 
 ### Smart Contracts
 
-[Smart Contracts](../contracts.md)
+[Smart Contracts](../Chains/eth-contracts.md)
 
 ### Deployed Contract Table
 _This is a digest of the contracts needed for the ChainBridge to operate._
