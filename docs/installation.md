@@ -1,7 +1,5 @@
 # Installation
 
-[ToC]
-
 Before anything further can be done, we need to download some necessary software.
 
 ### ChainBridge Binary

@@ -1,7 +1,5 @@
 # [GENERIC] ChainBridge Deployment Guide
 
-[ToC]
-
 In this guide, we're going to walk through the details of deploying a bridge between NetworkA (ETH) and NetworkB (CELO).
 
 ## Background

@@ -1,7 +1,5 @@
 # Transfer and Query Balances
 
-[ToC]
-
 ## Transfer: NetworkA > NetworkB
 
 *Let's transfer some tokens from NetworkA (ETH) to NetworkB (CELO).*

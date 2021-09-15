@@ -1,10 +1,8 @@
 # Relayers
 
-[ToC]
-
 The relayers perform the service of validating transfers across the ChainBridge. With 3 relayers serving as the distributed bridging authorities, proposal events (propose/execute) which are responsible for either the issuance or consumption of tokens, among other things, are communicated to their corresponding chain contracts when/if a consensus is reached between this group.
 
-**DO NOT USE THE RELAYERS' PRIVATE KEYS UNTIL YOU 100% SURE WHY ARE YOU DOING THIS**
+**DO NOT USE THE RELAYERS' PRIVATE KEYS UNLESS YOU ARE 100% SURE WHY ARE YOU DOING THIS**
 
 #### Generate Keypairs
 This command will generate an Ethereum keypair to be used for a relayer. Celo is EVM-compatible, so we can use this same command for generating Celo accounts as well.
@@ -14,25 +12,27 @@ This command will generate an Ethereum keypair to be used for a relayer. Celo is
 
 We will run this command **3 times** in order to generate accounts for the relayers; results shown below.
 
+**NOTE:** The below keypairs are not to be used in production; these are for example only.
+
 **Relayer 0:**
 
 ```bash
 Address: 0x010f478794f9b1917f9d2d31865f516729Be6208
-Private key: 68055bbd998453ac3c5242da290bab64dccf363fd3c0832ba692ff5de03895d7
+Private key: **stored elsewhere*
 ```
 
 **Relayer 1:**
 
 ```bash
 Address: 0x42F567FEA3Cf5F27186344F04A5774A753B55b39
-Private key: 1c5dde0c514afc4cc2660668e2bbe5fb7410923d7dcdd77aacc6b58545dd34be
+Private key: **stored elsewhere*
 ```
 
 **Relayer 2:**
 
 ```bash
 Address: 0xb7d584fE0085fEb275FAc27deaCddA404AdD949A
-Private key: 11f3eeb1e77a965f1ccb1f7196e23f87ed3b3a8af39039b25e33bd51371d437c
+Private key: **stored elsewhere*
 ```
 
 **Keystore Password:**

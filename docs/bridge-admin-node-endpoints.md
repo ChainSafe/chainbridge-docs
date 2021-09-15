@@ -1,13 +1,19 @@
 # Bridge Administrator and Node Endpoints
 
-[ToC]
-
 _Here we will configure the Bridge Administrator address as well as the endpoints of the network nodes we are seeking to bridge._
 
 ## Bridge Administrator
 _This will be your "spending address" (used to fund and invoke all transactions herein)._
 
+#### Generate Keypairs
+This command will generate an Ethereum keypair to be used for a relayer. Celo is EVM-compatible, so we can use this same command for generating Celo accounts as well.
+```bash
+./chainbridge-core-example evm-cli accounts generate
+```
+
+The output of this command will provide us with an address and a private key.
 **USE IT ONLY FOR BRIDGE ADMINISTRATION OR MINTING TOKENS**
+
 ```bash
 Address: 0x284D2Cb760D5A952f9Ea61fd3179F98a2CbF0B3E
 Private key: **stored elsewhere**
