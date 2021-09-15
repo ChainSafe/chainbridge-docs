@@ -1,13 +1,4 @@
-# ChainBridge Specification
-
-## Summary
-
-ChainBridge is a modular multi-directional blockchain bridge to allow data and value transfer between any number of
-blockchains. This should enable users to specify a destination blockchain from their source chain, and send data to
-that blockchain for consumption on the destination chain. This could be a token that is locked on ChainA and
-redeemed on ChainB, or an operation that is executed on a destination chain and initiated on the source chain. The bridge
-should maintain a set of relayers that are authorized to make & process transfers across the different blockchains. The bridge design should be modular enough that the addition of a new type of transfer should not require a full re-deployment of the suite of tools, rather small modular upgrades.
-
+# Specification
 
 ## Definitions
 
@@ -17,9 +8,11 @@ Each chain has a unique 8-bit identifier we refer to as the domain ID.
 
 Note: this number is arbitrary, but must remain consistent when in use for a specific chain; each chain's domain ID must be unique to that chain.
 
-ChainA: 0
-ChainB: 1
-ChainC: 2
+| Network | Domain ID |
+| -------- | -------- |
+| ChainA     | 0     |
+| ChainB     | 1     |
+| ChainC     | 2     |
 
 ### Deposit Nonce
 

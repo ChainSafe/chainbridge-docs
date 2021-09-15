@@ -1,9 +1,9 @@
-# [GENERIC] ChainBridge Deployment Guide
+# Deployment Guide
 
 In this guide, we're going to walk through the details of deploying a bridge between NetworkA (ETH) and NetworkB (CELO).
 
-## Background
-[Background](../background.md)
+## Overview
+[Overview](../index.md)
 
 ## Getting started
 
