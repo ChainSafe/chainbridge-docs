@@ -1,6 +1,7 @@
 # Table of contents
 
-* [chainbridge-docs](README.md)
+* [Introduction](README.md)
+* [chainbridge-docs](chainbridge-docs.md)
 * [docs](docs/README.md)
   * [🌉  Overview](docs/index.md)
   * [Installation](docs/installation.md)
@@ -10,7 +11,6 @@
   * [Relayers](docs/relayers.md)
   * [Specification](docs/spec.md)
   * [Metrics](docs/metrics.md)
-  * [CLI Options](docs/relayer.md)
   * [Chains](docs/chains/README.md)
     * [Ethereum Contracts](docs/chains/eth-contracts.md)
     * [Ethereum Implementation Specification](docs/chains/ethereum.md)
