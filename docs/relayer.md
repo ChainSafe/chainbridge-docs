@@ -6,7 +6,7 @@
 
 #### `chainbridge-core-example evm-cli accounts generate`
 
-```
+```text
 --blockstore string   Specify path for blockstore (default "./lvldbdata")
 --config string       Path to JSON configuration files directory (default ".")
 --fresh               Disables loading from blockstore at start. Opts will still be used if specified. (default: false)
@@ -21,6 +21,8 @@
 The `run` command is used to run the ChainBridge relayer.
 
 _example_
+
 ```bash
-./chainbridge-core-example 
+./chainbridge-core-example
 ```
+

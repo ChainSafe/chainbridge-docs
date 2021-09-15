@@ -4,7 +4,7 @@
 
 A chain configurations take this form:
 
-```
+```text
 {
     "name": "eth",                      // Human-readable name
     "type": "ethereum",                 // Chain type (eg. "ethereum" or "substrate")
@@ -15,13 +15,13 @@ A chain configurations take this form:
 }
 ```
 
-See `config.json.example` for an example configuration. 
+See `config.json.example` for an example configuration.
 
 ### Ethereum Options
 
 Ethereum chains support the following additional options:
 
-```
+```text
 {
     "bridge": "0x12345...",          // Address of the bridge contract (required)
     "erc20Handler": "0x1234...",     // Address of erc20 handler
@@ -42,7 +42,7 @@ Ethereum chains support the following additional options:
 
 Substrate supports the following additonal options:
 
-```
+```text
 {
     "startBlock": "1234" // The block to start processing events from (default: 0)
     "useExtendedCall": "true" // Extend extrinsic calls to substrate with ResourceID. Used for backward compatibility with example pallet.
@@ -51,9 +51,9 @@ Substrate supports the following additonal options:
 
 ## Blockstore
 
-The blockstore is used to record the last block the relayer processed, so it can pick up where it left off. 
+The blockstore is used to record the last block the relayer processed, so it can pick up where it left off.
 
-If a `startBlock` option is provided (see [Configuration](#configuration)), then the greater of `startBlock` and the latest block in the blockstore is used at startup.
+If a `startBlock` option is provided \(see [Configuration](configuration.md#configuration)\), then the greater of `startBlock` and the latest block in the blockstore is used at startup.
 
 To disable loading from the blockstore specify the `--fresh` flag. A custom path for the blockstore can be provided with `--blockstore <path>`. For development, the `--latest` flag can be used to start from the current block and override any other configuration.
 
@@ -67,4 +67,5 @@ To import external ethereum keys, such as those generated with geth, use `chainb
 
 To import private keys as keystores, use `chainbridge accounts import --privateKey key`.
 
-For testing purposes, chainbridge provides 5 test keys. The can be used with `--testkey <name>`, where `name` is one of `Alice`, `Bob`, `Charlie`, `Dave`, or `Eve`. 
+For testing purposes, chainbridge provides 5 test keys. The can be used with `--testkey <name>`, where `name` is one of `Alice`, `Bob`, `Charlie`, `Dave`, or `Eve`.
+

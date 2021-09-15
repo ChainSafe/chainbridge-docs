@@ -4,7 +4,7 @@
 
 ### Global
 
-```
+```text
 --config value       JSON configuration file
 --verbosity value    Supports levels crit (silent) to trce (trace) (default: "info")
 --keystore value     Path to keystore directory (default: "./keys")
@@ -23,7 +23,8 @@
 The commands can be used to manage keys in the local keystore. You can view available keys with `chainbridge accounts list`.
 
 #### `chainbridge accounts generate`
-```
+
+```text
 --password value  Password used to encrypt the keystore. Used with --generate, --import, or --unlock
 --sr25519         Specify account/key type as sr25519. (default: false)
 --secp256k1       Specify account/key type as secp256k1. (default: false)
@@ -31,7 +32,8 @@ The commands can be used to manage keys in the local keystore. You can view avai
 ```
 
 #### `chainbridge accounts import`
-```
+
+```text
 --ethereum          Import an existing ethereum keystore, such as from geth. (default: false)
 --privateKey value  Import a hex representation of a private key into a keystore.
 --sr25519           Specify account/key type as sr25519. (default: false)
@@ -40,8 +42,8 @@ The commands can be used to manage keys in the local keystore. You can view avai
 --network value     Specify the network to use for the address encoding (substrate/polkadot/centrifuge) (default: substrate)
 ```
 
-
 ## Environment Variables
 
-- `KEYSTORE_PASSWORD`: The password to use when loading the keystore.
-- `BLOCK_TIMEOUT`: The duration (seconds) until a chain is considered "unhealthy"
+* `KEYSTORE_PASSWORD`: The password to use when loading the keystore.
+* `BLOCK_TIMEOUT`: The duration \(seconds\) until a chain is considered "unhealthy"
+
