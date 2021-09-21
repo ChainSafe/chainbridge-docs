@@ -16,6 +16,7 @@
     * [Ethereum Implementation Specification](docs/chains/ethereum.md)
     * [Substrate Implementation Specification](docs/chains/substrate.md)
   * [Guides](docs/guides/README.md)
+    * [MetaMask Network Setup Guide](docs/guides/metamask-network-setup-guide.md)
     * [Deployment Guide](docs/guides/deployment-guide.md)
   * [FAQ](docs/faq.md)
 
