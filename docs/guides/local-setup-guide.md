@@ -132,7 +132,7 @@ Now that we have properly installed the [chainbridge-core-example](https://githu
 This step describes how to use the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example) CLI we previously configured in order to serve as a relayer for the networks we are seeking to bridge.
 
 
-**Notable flags**_
+**Notable flags:**
 
 `--config`: Path to JSON configuration files directory (default ".")
 
