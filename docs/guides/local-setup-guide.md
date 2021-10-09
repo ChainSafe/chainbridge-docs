@@ -7,12 +7,12 @@ In this guide, we're going to walk through the details of setting up the [chainb
 1. [Overview](#overview)
 2. [Installation](#installation)
 3. [Local Customization](#local-customization)
-4. [Setup Local Development Chains](#setup-local-developent-chains)
+4. [Setup Local Development Chains](#setup-local-development-chains)
 5. [Configuration](#configuration)
 6. [Usage](#usage)
 #
 ## Overview
-##### *borrowed from repository README 
+##### *borrowed from repository README
 &nbsp;  
 The [chainbridge-core](https://github.com/chainsafe/chainbridge-core) is the project that was born from the existing version of Chainbridge. It was built to improve the maintainability and modularity of the current solution. The fundamental distinction is that chainbridge-core is more of a framework rather than a stand-alone application.
 
