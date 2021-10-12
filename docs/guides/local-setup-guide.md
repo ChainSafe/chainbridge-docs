@@ -33,9 +33,9 @@ Before anything further can be done, we need to download and install some necess
 
 &nbsp; 
 ## Local Customization
-The above section helps you to install the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example) which internally sources the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) but it makes no mention how to assist with local development efforts.
+The above section helps you to install the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example) which internally sources the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) but it makes no mention of how to assist with local development efforts.
 
-Say we have are working on parts of the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) and wish to test functionality (outside of unit/integration tests) by building the CLI with our local changes. This can easily be made possible by adding a single line to our `go.mod` within the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example).
+Say we are working on parts of the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) and wish to test functionality (outside of unit/integration tests) by building the CLI with our local changes. This can easily be made possible by adding a single line to our `go.mod` within the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example).
 &nbsp; 
 ```go
 module github.com/ChainSafe/chainbridge-core-example
@@ -58,38 +58,18 @@ require (
 &nbsp; 
 
 ## Setup Local Development Chains
-In this step we will start one geth instance and an instance of chainbridge-bootstrapped-celo. 
+In this step we will start one geth instance and an instance of celo. 
 
-We chose these two networks because during the installation section we checked out the `evm-celo-dev` branch. 
+We chose these two networks because during the installation section we checked out the `evm-celo-dev` branch; therefore, the assumption is we will be bridging the Ethereum and Celo networks.
 
-Therefore, the assumption is we will be bridging the Ethereum and Celo networks.
+Within the `evm-celo-dev` branch you will find a `docker-compose.local.yml` file; we use this in order to start the chains for local development.
 
 ```bash
 docker-compose -f ./docker-compose.local.yml up -V
 ```
 
-`docker-compose.local.yml`
-```docker
-# Copyright 2020 ChainSafe Systems
-# SPDX-License-Identifier: LGPL-3.0-only
-version: '3'
-
-services:
-  celo:
-    image: "chainsafe/chainbridge-bootstrapped-celo:v1.0.0"
-    container_name: celo
-    ports:
-      - "8546:8545"
-  
-  geth:
-    image: "chainsafe/chainbridge-geth:20200505131100-5586a65"
-    container_name: geth
-    ports:
-      - "8545:8545"
-```
-
 ## Configuration
-Within the [chainbridge-core-example config directory](https://github.com/ChainSafe/chainbridge-core-example/blob/evm-celo-dev/config) of the `evm-celo-dev` branch you will find **two** JSON configuration files. Both of these will require some slight customizations since likely the `from`, `bridge`, `erc20Handler` and `endpoint` fields will need to be updated to your own local needs.
+Within the [chainbridge-core-example config directory](https://github.com/ChainSafe/chainbridge-core-example/blob/evm-celo-dev/config) of the `evm-celo-dev` branch you will find **two** JSON configuration files. Both of these will require some slight customizations since likely the `from`, `bridge`, `erc20Handler` and `endpoint` fields will need to be updated to your own local development needs.
 
 `config_celo.json`
 ```json
@@ -125,7 +105,7 @@ Within the [chainbridge-core-example config directory](https://github.com/ChainS
 
 &nbsp; 
 ## Usage
-Now that we have properly installed the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example), have seen how to customize its module sourcing for our local development needs as well as have some local networks running, we can now use the CLI for either issuing commands to the networks we are seeking to bridge, or by running the software as a bridge relayer if the contracts are already deployed.
+Now that we have properly installed the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example), have seen how to customize its module sourcing for our local development needs as well as have some local networks running via Docker, we can now use the CLI for either issuing commands to the networks we are seeking to bridge, or by running the software as a bridge relayer if the contracts are already deployed.
 
 &nbsp; 
 ### Running a bridge relayer
