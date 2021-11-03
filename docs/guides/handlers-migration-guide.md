@@ -4,10 +4,6 @@ In this guide, we're going to walk through the steps necessary for a bridge admi
 
 **NOTE:** this includes token migration as well as registering a new handler address. 
 
-#### TODO:
-- should this also assume that the new handler has been deployed previously?
-- should bridge be paused first prior to migration?
-
 ### Table of Contents
 
 1. [Overview](#overview)

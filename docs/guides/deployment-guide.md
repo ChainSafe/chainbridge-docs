@@ -1,6 +1,6 @@
 # Deployment Guide
 
-In this guide, we're going to walk through the details of deploying a bridge between NetworkA \(ETH\) and NetworkB \(CELO\).
+In this guide, we're going to walk through the details of deploying a bridge between NetworkA (ETH) and NetworkB (CELO).
 
 ## Overview
 
@@ -30,7 +30,7 @@ _This is a digest of the contracts needed for the ChainBridge to operate._
 
 **Keep note of these addresses as we will use them throughout the guide.**
 
-```text
+```
 NetworkA: ChainID: 1
 ================================================================
 Bridge:             0x0 (TBD)
@@ -56,13 +56,13 @@ _^The ResourceID shown above provides us with a way to associate some action on 
 
 _More about ResourceIDs_ [_here_](../spec.md#resource-id)_._
 
-## Preparations: NetworkA \(ETH\)
+## Preparations: NetworkA (ETH)
 
 ### Deploy Bridge, ERC20 and ERC20 Handler Contracts
 
 _Deploy all of the contracts required for bridging_
 
-**Notable flags:** 1. **relayerThreshold:** a relayer threshold of 2 \(meaning 2 votes are required for a proposal to pass\) 2. **relayers:** a string list of our relayer addresses \(from above\)
+**Notable flags:** 1. **relayerThreshold:** a relayer threshold of 2 (meaning 2 votes are required for a proposal to pass) 2. **relayers:** a string list of our relayer addresses (from above)
 
 ```bash
 ./chainbridge-core-example \
@@ -143,13 +143,16 @@ mint \
 --erc20Address 0x0
 ```
 
-## Preparations: NetworkB \(CELO\)
+## Preparations: NetworkB (CELO)
 
 ### Deploy Bridge, ERC20 and ERC20 Handler Contracts
 
 _Deploy all of the contracts required for bridging_
 
-**Notable flags:** 1. **relayerThreshold:** a relayer threshold of 2 \(meaning 2 votes are required for a proposal to pass\) 2. **relayers:** a string list of our relayer addresses \(from above\)
+**Notable flags:**&#x20;
+
+1. **relayerThreshold:** a relayer threshold of 2 (meaning 2 votes are required for a proposal to pass)
+2. **relayers:** a string list of our relayer addresses (from above)
 
 ```bash
 ./chainbridge-core-example \
@@ -229,4 +232,3 @@ mint \
 --amount 10 \
 --erc20Address 0x0
 ```
-
