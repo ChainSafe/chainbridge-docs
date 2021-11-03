@@ -41,7 +41,7 @@ deposit \
 --bridge 0x0 \
 --recipient 0x0 \
 --amount 1 \
---destId 0 \
+--domainId 0 \
 --resourceId 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500 \
 --decimals 18
 ```
@@ -87,7 +87,7 @@ deposit \
 --bridge 0x0 \
 --recipient 0x0 \
 --amount 100 \
---destId 1 \
+--domainId 1 \
 --resourceId 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500 \
 --decimals 18
 ```
