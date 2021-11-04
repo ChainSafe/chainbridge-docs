@@ -74,7 +74,7 @@ deploy \
 --relayerThreshold 2 \
 --chainId 1 \
 --relayers "0x010f478794f9b1917f9d2d31865f516729Be6208,0x42F567FEA3Cf5F27186344F04A5774A753B55b39,0xb7d584fE0085fEb275FAc27deaCddA404AdD949A" \
---erd20Name TestToken \
+--erc20Name TestToken \
 --erc20Symbol TST
 ```
 
@@ -164,7 +164,7 @@ deploy \
 --relayerThreshold 2 \
 --chainId 0 \
 --relayers "0x010f478794f9b1917f9d2d31865f516729Be6208,0x42F567FEA3Cf5F27186344F04A5774A753B55b39,0xb7d584fE0085fEb275FAc27deaCddA404AdD949A" \
---erd20Name CeloTestToken \
+--erc20Name CeloTestToken \
 --erc20Symbol cTST
 ```
 
