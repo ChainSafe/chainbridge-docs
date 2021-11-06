@@ -10,7 +10,7 @@ In this guide, we're going to walk through the steps necessary for a bridge admi
 2. [Migration](#migration)
 #
 ## Overview
-As explained within [eth-contracts](../chains/eth-contracts.md), these handlers are responsible for transferring ERC assets. They provide the bridge with the ability to take ownership of tokens and release tokens in order to execute transfers.
+As explained within [eth-contracts](../chains/eth-contracts.md), the handler contracts are responsible for transferring ERC assets. They provide the bridge with the ability to take ownership of tokens and release tokens in order to execute mints/burns.
 
 Different configurations may require different interface interactions. For example, it may make sense to mint and burn a token that is originally from another chain. If supply needs to be controlled, transferring tokens in and out of a reserve may be desired instead.
 
@@ -52,6 +52,8 @@ A demo example on how to do this with more context can be found [here](../transf
 [Docs: ERC20 Balance](https://github.com/ChainSafe/chainbridge-core/blob/main/README.md#balance)
 
 3. Withdraw total token balance from HandlerA (old) into HandlerB (new)
+
+**NOTE:** This is only relevant if the HandlerA (old) was granted authority to burn (ie, `bridge set-burn` was invoked on this handler).
 
 Once you know the total token balance that exists on HandlerA (old), utilize the admin CLI command `withdraw` in order to transfer out the tokens that exist on HandlerA (old), effectively allowing us to drain the contract of its entire token balance and setting the output of this action to be the newly deployed, custom handler, HandlerB (new).
 
