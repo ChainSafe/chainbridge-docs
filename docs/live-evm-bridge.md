@@ -89,9 +89,9 @@ To avoid duplication in the subsequent commands set the following env vars in yo
 SRC_GATEWAY=https://goerli-light.eth.linkpool.io/
 DST_GATEWAY=https://rinkeby-light.eth.linkpool.io/
 
-SRC_ADDR="<Your public key on Görli>"
+SRC_ADDR="<Your address on Görli>"
 SRC_PK="<your private key on Görli>"
-DST_ADDR="<Your public key on Rinkeby>"
+DST_ADDR="<Your address on Rinkeby>"
 DST_PK="<your private key on Rinkeby>"
 
 SRC_TOKEN="0xaFF4481D10270F50f203E0763e2597776068CBc5"
