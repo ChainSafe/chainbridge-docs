@@ -8,9 +8,15 @@ _In this step, we will build the ChainBridge-Core-Example binary._
 
 _This binary will function as the bridge remote control, so-to-speak, and is designed to showcase compatibility of our core bridge code alongside network-specific modules._
 
-For this example, the binary includes the following components: 1. **Core:** general code necessary to operating the bridge 2. **Celo-Module:** the Celo-specific code 3. **EVM-Module:** the EVM-specific code
+For this example, the binary includes the following components:&#x20;
 
-_If you wish to bridge different networks other than the example provided, simply clone the_ [_ChainBridge-Core-Example repository_](https://github.com/ChainSafe/chainbridge-core-example.git)_, checkout one of the other pre-configured branches \(e.g. evm-evm, evm-substrate\), and then follow the instructions provided in the `Makefile` to install the binary._
+1\. **Core:** general code necessary to operating the bridge&#x20;
+
+2\. **Celo-Module:** the Celo-specific code&#x20;
+
+3\. **EVM-Module:** the EVM-specific code
+
+_If you wish to bridge different networks other than the example provided, simply clone the_ [_ChainBridge-Core-Example repository_](https://github.com/ChainSafe/chainbridge-core-example.git)_, checkout one of the other pre-configured branches (e.g. evm-evm, evm-substrate), and then follow the instructions provided in the `Makefile` to install the binary._
 
 ### Clone Repository
 
@@ -68,4 +74,3 @@ Use " [command] --help" for more information about a command.
 ```
 
 #### If any part of the installation fails or if the instructions are unclear, feel free to reach out to us directly via our shared Slack channel for assistance.
-
