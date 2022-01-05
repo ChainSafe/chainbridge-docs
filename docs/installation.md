@@ -30,10 +30,10 @@ git clone https://github.com/ChainSafe/chainbridge-core-example.git
 
 _Now we will `cd` into the chainbridge-core-example repo and checkout a pre-configured branch for the networks we are wishing to bridge._
 
-#### Since we are bridging Celo and Ethereum, we will use the `celo-evm-dev` branch.
+#### Since we are bridging Celo and Ethereum, we will use the `evm-celo-dev` branch.
 
 ```bash
-cd chainbridge-core-example && git checkout celo-evm-dev
+cd chainbridge-core-example && git checkout evm-celo-dev
 ```
 
 ### Build Binary
