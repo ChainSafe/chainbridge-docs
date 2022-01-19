@@ -1,6 +1,6 @@
 # Configuration
 
-> Note: TOML configs have been deprecated in favour of JSON
+> **Note**: TOML configs have been deprecated in favour of JSON
 
 A chain configurations take this form:
 
@@ -16,6 +16,7 @@ A chain configurations take this form:
 ```
 
 See `config.json.example` for an example configuration.
+
 
 ### Ethereum Options
 
@@ -38,6 +39,7 @@ Ethereum chains support the following additional options:
 }
 ```
 
+
 ### Substrate Options
 
 Substrate supports the following additonal options:
@@ -49,6 +51,7 @@ Substrate supports the following additonal options:
 }
 ```
 
+
 ## Blockstore
 
 The blockstore is used to record the last block the relayer processed, so it can pick up where it left off.
@@ -56,6 +59,7 @@ The blockstore is used to record the last block the relayer processed, so it can
 If a `startBlock` option is provided \(see [Configuration](configuration.md#configuration)\), then the greater of `startBlock` and the latest block in the blockstore is used at startup.
 
 To disable loading from the blockstore specify the `--fresh` flag. A custom path for the blockstore can be provided with `--blockstore <path>`. For development, the `--latest` flag can be used to start from the current block and override any other configuration.
+
 
 ## Keystore
 
@@ -68,4 +72,3 @@ To import external ethereum keys, such as those generated with geth, use `chainb
 To import private keys as keystores, use `chainbridge accounts import --privateKey key`.
 
 For testing purposes, chainbridge provides 5 test keys. The can be used with `--testkey <name>`, where `name` is one of `Alice`, `Bob`, `Charlie`, `Dave`, or `Eve`.
-

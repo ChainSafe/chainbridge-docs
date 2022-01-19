@@ -2,7 +2,7 @@
 
 In this guide, we're going to walk through the steps necessary for a bridge administrator to complete when a customized ERC20/721/generic handler is to be used instead of the default ERC20/721/generic handler.
 
-**NOTE:** this includes token migration as well as registering a new handler address. 
+**Note:** this includes token migration as well as registering a new handler address.
 
 ### Table of Contents
 
@@ -16,46 +16,46 @@ Different configurations may require different interface interactions. For examp
 
 As a result, a dev may wish to implement their own custom handlers outside of the default handlers we have provided. In such an event, the handler must be deployed and then properly assigned a [resource ID](../spec.md#resource-id) to it in order for actions to be associated with this custom handler.
 
-**NOTE:** _Within this guide we will be utilizing the `chainbridge-core-example` as a means of showcasing the CLI commands from the `chainbridge-core`. For help installing the `chainbridge-core-example`, see our [installation](../installation.md) guide._
-&nbsp;  
+**Note:** _Within this guide we will be utilizing the `chainbridge-core-example` as a means of showcasing the CLI commands from the `chainbridge-core`. For help installing the `chainbridge-core-example`, see our [installation](../installation.md) guide._
+&nbsp;
 ## Migration
 In the event that a default handler has already been deployed and a new, custom handler is to be used in its stead, a migration will need to occur.
 
 This migration consists of **five** steps:
 1. Pausing the bridge contract
-2. Identifying total token balance stored within HandlerA (old)
-3. Transferring total token balance stored within HandlerA (old) -> HandlerB (new)
-4. Overwriting a mapping within the bridge contract: 
+2. Identifying total token balance stored within Handler A (old)
+3. Transferring total token balance stored within Handler A (old) -> Handler B (new)
+4. Overwriting a mapping within the bridge contract:
 
-    a. [ResourceID => HandlerAddress](https://github.com/ChainSafe/chainbridge-solidity/blob/master/contracts/Bridge.sol#L40)
-&nbsp;  
+    a. [ResourceID => Handler Address](https://github.com/ChainSafe/chainbridge-solidity/blob/master/contracts/Bridge.sol#L40)
+&nbsp;
 5. Unpausing the bridge contract
 ### Steps
 1. Pause the bridge contract
 
-In this first step, we will invoke the admin `pause` command which will freeze the bridge. During this time, both deposits and proposals will be disallowed. 
+In this first step, we will invoke the admin `pause` command which will freeze the bridge. During this time, both deposits and proposals will be disallowed.
 
 This is an important step to remember to take as a bridge administrator so as to prevent your bridge users from accidentally losing tokens during the migration of your handlers.
 
 [Docs: Admin Pause](https://github.com/ChainSafe/chainbridge-core/blob/main/README.md#pause)
 
-2. Identify total token balance stored within HandlerA (old)
+2. Identify total token balance stored within Handler A (old)
 
-Query the balance of the HandlerA (old) contract. This is a necessary step in order to identify how much token exists on the handlers so that, as the administrator, we know how much token we seek to remove or withdraw out of our ERC handler safe, as we will do in the next step.
+Query the balance of the Handler A (old) contract. This is a necessary step in order to identify how much token exists on the handlers so that, as the administrator, we know how much token we seek to remove or withdraw out of our ERC handler safe, as we will do in the next step.
 
 There are few ways of accomplishing this, but if the contract is deployed to a network that utilizes a block explorer, simply using the explorer UI to query the handler contract's balance is likely the easiest way.
 
-You can also utilize the CLI to query the balance of either: an [Externally Owned Account (EOA)](https://ethdocs.org/en/latest/contracts-and-transactions/account-types-gas-and-transactions.html) or a [Contract Account](https://ethdocs.org/en/latest/contracts-and-transactions/account-types-gas-and-transactions.html#contract-accounts). 
+You can also utilize the CLI to query the balance of either: an [Externally Owned Account (EOA)](https://ethdocs.org/en/latest/contracts-and-transactions/account-types-gas-and-transactions.html) or a [Contract Account](https://ethdocs.org/en/latest/contracts-and-transactions/account-types-gas-and-transactions.html#contract-accounts).
 
 A demo example on how to do this with more context can be found [here](../transfer-and-balances.md#query-balances).
 
 [Docs: ERC20 Balance](https://github.com/ChainSafe/chainbridge-core/blob/main/README.md#balance)
 
-3. Withdraw total token balance from HandlerA (old) into HandlerB (new)
+3. Withdraw total token balance from Handler A (old) into Handler B (new)
 
-**NOTE:** This is only relevant if the HandlerA (old) was granted authority to burn (ie, `bridge set-burn` was invoked on this handler).
+**Note:** This is only relevant if the Handler A (old) was granted authority to burn (ie, `bridge set-burn` was invoked on this handler).
 
-Once you know the total token balance that exists on HandlerA (old), utilize the admin CLI command `withdraw` in order to transfer out the tokens that exist on HandlerA (old), effectively allowing us to drain the contract of its entire token balance and setting the output of this action to be the newly deployed, custom handler, HandlerB (new).
+Once you know the total token balance that exists on Handler A (old), utilize the admin CLI command `withdraw` in order to transfer out the tokens that exist on Handler A (old), effectively allowing us to drain the contract of its entire token balance and setting the output of this action to be the newly deployed, custom handler, Handler B (new).
 
 **Notable Flags:**
 - `--amount`: the amount of tokens to withdraw
@@ -83,7 +83,7 @@ withdraw \
 
 4. Next, we will need to register the new handler
 
-In this second-to-last step, we will register the new handler, HandlerB (new), and map it to a resource ID, used to associate an action with a resource.
+In this second-to-last step, we will register the new handler, Handler B (new), and map it to a resource ID, used to associate an action with a resource.
 
 **Notable Flags:**
 - `--bridge`: the address of the bridge
