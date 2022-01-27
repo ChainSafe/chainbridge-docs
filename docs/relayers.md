@@ -12,64 +12,18 @@ This command will generate an Ethereum keypair to be used for a relayer. Celo is
 ./chainbridge-core-example evm-cli accounts generate
 ```
 
-We will run this command **3 times** in order to generate accounts for the relayers; results shown below.
-
-**NOTE:** The below keypairs are not to be used in production; these are for example only.
-
-**Relayer 0:**
-
-```bash
-Address: 0x010f478794f9b1917f9d2d31865f516729Be6208
-Private key: **stored elsewhere*
-```
-
-**Relayer 1:**
-
-```bash
-Address: 0x42F567FEA3Cf5F27186344F04A5774A753B55b39
-Private key: **stored elsewhere*
-```
-
-**Relayer 2:**
-
-```bash
-Address: 0xb7d584fE0085fEb275FAc27deaCddA404AdD949A
-Private key: **stored elsewhere*
-```
-
-**Keystore Password:** This is a sample password for your keystore. This password should be more secure when using in a production environment, but we are using the below as an example.
-
-```bash
-1234567890
-```
-
-## Clone ChainBridge-Relayers Repository
-
-Each Relayer will need to access keystore, config and blockstore files. These files can be stored conveniently in directories to be then accessed by the relayer. We have created a repository to provide a sample relayer setup and directory structure for convenience.
-
-```bash
-git clone https://github.com/chainsafe/chainbridge-relayers
-```
-
-_Directory structure:_
-
-```bash
-ls
-
-README.md        config0            keys0
-blockstore0        config1            keys1
-blockstore1        config2            keys2
-blockstore2        docker-compose.yml    prometheus
-```
+We will run this command **3 times** in order to generate accounts for the relayers.
 
 ## Generate Keystore Files
 
 _This command imports a keystore to be used for invoking bridge transfers and issuing commands._
 
-#### In the below example, we will use the private key and keystore password for Relayer0 to import a keystore.
+#### In the below example, we will use the private key and keystore password for Relayer 1 to import a keystore.
+
+**Keystore Password:** This is a sample password for your keystore. This password should be more secure when using in a production environment, but we are using the below as an example.
 
 ```bash
-./chainbridge-core-example evm-cli accounts import --privateKey 68055bbd998453ac3c5242da290bab64dccf363fd3c0832ba692ff5de03895d7 --password 1234567890
+./chainbridge-core-example evm-cli accounts import --privateKey **relayer 1 private key** --password 1234567890
 ```
 
 This should be run **3 times**, once for each relayer, using the corresponding private key of each relayer for each invocation.
@@ -81,14 +35,16 @@ Example:
 ```bash
 ls keys*
 
-keys0:
-0x010f478794f9b1917f9d2d31865f516729Be6208.key
+**relayer 1 address**.key
+**relayer 2 address**.key
+**relayer 3 address**.key
+```
+_We suggest to store relayer addresses in environment variables for easier usage with CLI commands._
 
-keys1:
-0x42F567FEA3Cf5F27186344F04A5774A753B55b39.key
-
-keys2:
-0xb7d584fE0085fEb275FAc27deaCddA404AdD949A.key
+```bash
+export RELAYER_1_ADDRESS = '**relayer 1 address**'
+export RELAYER_2_ADDRESS = '**relayer 2 address**'
+export RELAYER_3_ADDRESS = '**relayer 3 address**'
 ```
 
 ## Fund Bridge Administrator and Relayers
@@ -99,11 +55,10 @@ Both the bridge admin and relayer accounts should hold a small amount of funds i
 
 ```text
 # Bridge Admin
-0x284D2Cb760D5A952f9Ea61fd3179F98a2CbF0B3E
+**bridge admin address**
 
 # Relayers
-0x010f478794f9b1917f9d2d31865f516729Be6208
-0x42F567FEA3Cf5F27186344F04A5774A753B55b39
-0xb7d584fE0085fEb275FAc27deaCddA404AdD949A
+**relayer 1 address**
+**relayer 2 address**
+**relayer 3 address**
 ```
-

@@ -13,14 +13,14 @@ In this guide, we're going to walk through the details of setting up the [chainb
 #
 ## Overview
 ##### *borrowed from repository README
-&nbsp;  
+&nbsp;
 The [chainbridge-core](https://github.com/chainsafe/chainbridge-core) is the project that was born from the existing version of Chainbridge. It was built to improve the maintainability and modularity of the current solution. The fundamental distinction is that chainbridge-core is more of a framework rather than a stand-alone application.
 
 In other words, it's a library, and therefore contains no `main.go` file. Therefore, we need some sort of example that will allow us to source files and packages from the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) library.
 
-For this case, we have created the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example). 
+For this case, we have created the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example).
 
-As the name suggests, this is an example application (CLI) that serves **two** purposes: 
+As the name suggests, this is an example application (CLI) that serves **two** purposes:
 1. [It allows us to issue commands to our ChainBridge contracts](../transfer-and-balances.md)
 2. [It serves the unique distinction as a bridge relayer](../relayers.md)
 
@@ -31,12 +31,12 @@ Before anything further can be done, we need to download and install some necess
 
 [Installation](../installation.md)
 
-&nbsp; 
+&nbsp;
 ## Local Customization
 The above section helps you to install the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example) which internally sources the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) but it makes no mention of how to assist with local development efforts.
 
 Say we are working on parts of the [chainbridge-core](https://github.com/chainsafe/chainbridge-core) and wish to test functionality (outside of unit/integration tests) by building the CLI with our local changes. This can easily be made possible by adding a single line to our `go.mod` within the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example).
-&nbsp; 
+&nbsp;
 ```go
 module github.com/ChainSafe/chainbridge-core-example
 
@@ -55,10 +55,10 @@ require (
 )
 ```
 
-&nbsp; 
+&nbsp;
 
 ## Setup Local Development Chains
-In this step we will start one geth instance and an instance of celo. 
+In this step we will start one geth instance and an instance of celo.
 
 We chose these two networks because during the installation section we checked out the `evm-celo-dev` branch; therefore, the assumption is we will be bridging the Ethereum and Celo networks.
 
@@ -101,13 +101,13 @@ Within the [chainbridge-core-example config directory](https://github.com/ChainS
 }
 ```
 
-#### NOTE: You will notice that the `id` field within both configs is different- this is a requirement; both chains must not share the same `id`!
+#### Note: You will notice that the `id` field within both configs is different- this is a requirement; both chains must not share the same `id`!
 
-&nbsp; 
+&nbsp;
 ## Usage
 Now that we have properly installed the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example), have seen how to customize its module sourcing for our local development needs as well as have some local networks running via Docker, we can now use the CLI for either issuing commands to the networks we are seeking to bridge, or by running the software as a bridge relayer if the contracts are already deployed.
 
-&nbsp; 
+&nbsp;
 ### Running a bridge relayer
 This step describes how to use the [chainbridge-core-example](https://github.com/chainsafe/chainbridge-core-example) CLI we previously configured in order to serve as a relayer for the networks we are seeking to bridge.
 
@@ -121,7 +121,7 @@ This step describes how to use the [chainbridge-core-example](https://github.com
 `--fresh`: Disables loading from blockstore at start. Opts will still be used if specified. (default: false)
 
 ```bash
-./chainbridge-core-example run --config /path/to/your/config/directory --testkey alice --fresh 
+./chainbridge-core-example run --config /path/to/your/config/directory --testkey alice --fresh
 ```
 
 The following resources can be referenced for further explanation in either of these areas.
@@ -129,4 +129,3 @@ The following resources can be referenced for further explanation in either of t
 [Deployment Guide](deployment-guide.md)
 
 [CLI Commands](https://github.com/ChainSafe/chainbridge-core/blob/main/README.md)
-

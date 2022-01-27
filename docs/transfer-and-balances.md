@@ -17,9 +17,9 @@ Flags: 1. **recipient:** the ERC20 Handler contract from the [deployed contract 
 evm-cli \
 erc20 \
 approve \
---url $NODE_ENDPOINT_NETWORKA \
---privateKey BRIDGE_ADMIN_PRIVATE_KEY \
---erc20address 0x0 \
+--url $NODE_ENDPOINT_NETWORK_A \
+--privateKey $BRIDGE_ADMIN_PRIVATE_KEY \
+--erc20Address $ERC_20_ADDRESS \
 --amount 100 \
 --recipient 0x0 \
 --decimals 18
@@ -36,13 +36,13 @@ Flags: 1. **bridge:** the bridge contract from the [deployed contract table](tra
 evm-cli \
 erc20 \
 deposit \
---url $NODE_ENDPOINT_NETWORKA \
---privateKey BRIDGE_ADMIN_PRIVATE_KEY \
---bridge 0x0 \
+--url $NODE_ENDPOINT_NETWORK_A \
+--privateKey $BRIDGE_ADMIN_PRIVATE_KEY \
+--bridge $BRIDGE_ADDRESS \
 --recipient 0x0 \
 --amount 1 \
 --domainId 0 \
---resourceId 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500 \
+--resourceId $RESOURCE_ID \
 --decimals 18
 ```
 
@@ -63,9 +63,9 @@ Flags: 1. **recipient:** the ERC20 Handler contract from the [deployed contract 
 celo-cli \
 erc20 \
 approve \
---url $NODE_ENDPOINT_NETWORKB \
---privateKey BRIDGE_ADMIN_PRIVATE_KEY \
---erc20address 0x0 \
+--url $NODE_ENDPOINT_NETWORK_B \
+--privateKey $BRIDGE_ADMIN_PRIVATE_KEY \
+--erc20Address $ERC_20_ADDRESS \
 --amount 100 \
 --recipient 0x0 \
 --decimals 18
@@ -82,13 +82,13 @@ Flags: 1. **bridge:** the bridge contract from the [deployed contract table](tra
 celo-cli \
 erc20 \
 deposit \
---url $NODE_ENDPOINT_NETWORKB \
---privateKey BRIDGE_ADMIN_PRIVATE_KEY \
---bridge 0x0 \
+--url $NODE_ENDPOINT_NETWORK_B \
+--privateKey $BRIDGE_ADMIN_PRIVATE_KEY \
+--bridge $BRIDGE_ADDRESS \
 --recipient 0x0 \
 --amount 100 \
 --domainId 1 \
---resourceId 000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69500 \
+--resourceId $RESOURCE_ID \
 --decimals 18
 ```
 
@@ -107,8 +107,8 @@ Flags: 1. **erc20address:** the ERC20 contract from the [deployed contract table
 evm-cli \
 erc20 \
 balance \
---url $NODE_ENDPOINT_NETWORKA \
---erc20Address 0x0 \
+--url $NODE_ENDPOINT_NETWORK_A \
+--erc20Address $ERC_20_ADDRESS \
 --accountAddress 0x284D2Cb760D5A952f9Ea61fd3179F98a2CbF0B3E
 ```
 
@@ -123,8 +123,7 @@ Flags: 1. **erc20address:** the ERC20 contract from the [deployed contract table
 celo-cli \
 erc20 \
 balance \
---url $NODE_ENDPOINT_NETWORKB \
---erc20Address 0x0 \
+--url $NODE_ENDPOINT_NETWORK_B \
+--erc20Address $ERC_20_ADDRESS \
 --accountAddress 0x284D2Cb760D5A952f9Ea61fd3179F98a2CbF0B3E
 ```
-
