@@ -52,7 +52,8 @@ deploy \
 --domain 1 \
 --relayers $RELAYER_1_ADDRESS,$RELAYER_2_ADDRESS,$RELAYER_3_ADDRESS \
 --erc20-name EthTestToken \
---erc20-symbol eTST
+--erc20-symbol eTST \
+--fee 0
 ```
 
 
@@ -208,7 +209,8 @@ deploy \
 --domain 1 \
 --relayers $RELAYER_1_ADDRESS,$RELAYER_2_ADDRESS,$RELAYER_3_ADDRESS \
 --erc20-name CeloTestToken \
---erc20-symbol cTST
+--erc20-symbol cTST \
+--fee 0
 ```
 
 
