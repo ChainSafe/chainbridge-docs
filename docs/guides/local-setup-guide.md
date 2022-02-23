@@ -62,10 +62,10 @@ In this step we will start one geth instance and an instance of celo.
 
 We chose these two networks because during the installation section we checked out the `evm-celo-dev` branch; therefore, the assumption is we will be bridging the Ethereum and Celo networks.
 
-Within the `evm-celo-dev` branch you will find a `docker-compose.local.yml` file; we use this in order to start the chains for local development.
+Within the `evm-celo-dev` branch you will find a `docker-compose.e2e.yml` file; we use this in order to start the chains for local development.
 
 ```bash
-docker-compose -f ./docker-compose.local.yml up -V
+docker-compose -f ./docker-compose.e2e.yml up -V
 ```
 
 ## Configuration
