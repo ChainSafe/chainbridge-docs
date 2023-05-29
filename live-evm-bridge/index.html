@@ -1,0 +1,1358 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular Multi-Directional Blockchain Bridge to interact with Multiple Networks; Ethereum, Ethereum Classic, Substrate, Cosmos-SDK based chains.">
+      
+      
+      
+      
+        <link rel="prev" href="../local/">
+      
+      
+        <link rel="next" href="../faq/">
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>Deploying Live (EVM EVM) - ChainBridge Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploying-a-live-evm-evm-token-bridge" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<h3 style="color: red">IMPORTANT!</h3>
+<p>ChainSafe has moved on from ChainBridge, offering only limited support for the new <a href="https://github.com/ChainSafe/chainbridge-core">chainbridge-core repo</a>.</p>
+<p>We will happily collaborate with new maintainers of the ChainBridge repo if <a href="https://github.com/ChainSafe/chainbridge-core/issues">issues</a> are formally submitted on our GitHub.</p>
+<p>In the meanwhile, there are other open source options to checkout that has based their relayer infrastructure on chainbridge-core’s, such as <a href="http://buildwithsygma.com/">Sygma</a>, with whom we are excited to lend our expertise on. We hope you check it out!</p>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ChainBridge Docs" class="md-header__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChainBridge Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deploying Live (EVM <-> EVM)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ChainSafe/chainbridge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ChainBridge Docs" class="md-nav__button md-logo" aria-label="ChainBridge Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ChainBridge Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ChainSafe/chainbridge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chainsafe/chainbridge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Configuration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-options/" class="md-nav__link">
+        CLI Options
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Specification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Specification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spec/" class="md-nav__link">
+        ChainBridge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Ethereum
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ethereum
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/ethereum/" class="md-nav__link">
+        Bridge Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/eth-contracts/" class="md-nav__link">
+        Contracts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chains/substrate/" class="md-nav__link">
+        Substrate
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local/" class="md-nav__link">
+        Running Locally (EVM <-> Substrate)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Deploying Live (EVM <-> EVM)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Deploying Live (EVM <-> EVM)
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-cross-chain-token-transfers" class="md-nav__link">
+    Overview of Cross-chain Token Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of Cross-chain Token Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lock-and-mint-burn-and-release" class="md-nav__link">
+    Lock-and-Mint | Burn-and-Release
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chainbridge-components" class="md-nav__link">
+    ChainBridge Components
+  </a>
+  
+    <nav class="md-nav" aria-label="ChainBridge Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bridge-contract" class="md-nav__link">
+    Bridge Contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    Handlers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relayers" class="md-nav__link">
+    Relayers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-your-own-bridge" class="md-nav__link">
+    Deploying your own bridge
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying your own bridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" class="md-nav__link">
+    Accounts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling" class="md-nav__link">
+    Tooling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    Steps
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deploy-contracts-on-source-gorli" class="md-nav__link">
+    1. Deploy contracts on Source (Görli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-contracts-on-source" class="md-nav__link">
+    2. Configure contracts on Source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy-contracts-on-destination-rinkeby" class="md-nav__link">
+    3. Deploy contracts on Destination (Rinkeby)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configure-contracts-on-destination" class="md-nav__link">
+    4. Configure contracts on Destination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-relayer" class="md-nav__link">
+    Create a Relayer
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Relayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-relayer" class="md-nav__link">
+    1. Build the relayer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-author-a-config" class="md-nav__link">
+    2. Author a config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-set-up-keys" class="md-nav__link">
+    3. Set up keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-test-our-bridge" class="md-nav__link">
+    Lets test our bridge!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#and-back-again" class="md-nav__link">
+    And back again!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-thoughts" class="md-nav__link">
+    Closing thoughts
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test/" class="md-nav__link">
+        Testing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Releases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/ChainBridge/tags" class="md-nav__link">
+        Relayer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/ChainSafe/chainbridge-solidity/tags" class="md-nav__link">
+        Solidity
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-cross-chain-token-transfers" class="md-nav__link">
+    Overview of Cross-chain Token Transfers
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of Cross-chain Token Transfers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lock-and-mint-burn-and-release" class="md-nav__link">
+    Lock-and-Mint | Burn-and-Release
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chainbridge-components" class="md-nav__link">
+    ChainBridge Components
+  </a>
+  
+    <nav class="md-nav" aria-label="ChainBridge Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bridge-contract" class="md-nav__link">
+    Bridge Contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    Handlers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relayers" class="md-nav__link">
+    Relayers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-your-own-bridge" class="md-nav__link">
+    Deploying your own bridge
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying your own bridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" class="md-nav__link">
+    Accounts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling" class="md-nav__link">
+    Tooling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    Steps
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deploy-contracts-on-source-gorli" class="md-nav__link">
+    1. Deploy contracts on Source (Görli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configure-contracts-on-source" class="md-nav__link">
+    2. Configure contracts on Source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy-contracts-on-destination-rinkeby" class="md-nav__link">
+    3. Deploy contracts on Destination (Rinkeby)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configure-contracts-on-destination" class="md-nav__link">
+    4. Configure contracts on Destination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-relayer" class="md-nav__link">
+    Create a Relayer
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Relayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-relayer" class="md-nav__link">
+    1. Build the relayer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-author-a-config" class="md-nav__link">
+    2. Author a config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-set-up-keys" class="md-nav__link">
+    3. Set up keys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-test-our-bridge" class="md-nav__link">
+    Lets test our bridge!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#and-back-again" class="md-nav__link">
+    And back again!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-thoughts" class="md-nav__link">
+    Closing thoughts
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="deploying-a-live-evm-evm-token-bridge">Deploying a Live EVM-&gt;EVM Token Bridge<a class="headerlink" href="#deploying-a-live-evm-evm-token-bridge" title="Permanent link">&para;</a></h1>
+<p>This tutorial walks through the process of deploying a token exchange bridge between two Ethereum test networks (Görli and Rinkeby). It could similarly be applied to link any two EVM-based chains including the Ethereum mainnet.</p>
+<p>At a high level setting up ChainBridge for token transfers requires the following:</p>
+<ul>
+<li>A token native to ChainA (e.g. TKN) and a destination token on ChainB which will represent the source token wrapped (e.g. wTKN)</li>
+<li>The ChainBridge bridge contract deployed to each chain</li>
+<li>Handler contracts on each chain to instruct the bridge what to do with the tokens</li>
+<li>One or more off-chain relayers running to pick up transactions from the source chain and relay them to the destination chain</li>
+</ul>
+<h2 id="overview-of-cross-chain-token-transfers">Overview of Cross-chain Token Transfers<a class="headerlink" href="#overview-of-cross-chain-token-transfers" title="Permanent link">&para;</a></h2>
+<p>Tokens are inherently native to a single chain; however, with a bit of contract magic it is possible to make something equivalent to transferring value between two chains.</p>
+<h3 id="lock-and-mint-burn-and-release">Lock-and-Mint | Burn-and-Release<a class="headerlink" href="#lock-and-mint-burn-and-release" title="Permanent link">&para;</a></h3>
+<p>This approach is appealing because it imposes very few requirements on the asset on the source chain other than it must be transferable and lockable in a contract. This makes it possible to use with native assets (e.g. ETH) or existing tokens that you don't control.</p>
+<p>The basic flow of lock-and-mint is as follows:</p>
+<ol>
+<li>Assets on the source chain are deposited in a bridge contract which <strong>locks</strong> them up</li>
+<li>A relayer observes this transaction and sends a new transaction to the bridge contract on the destination chain. This transaction should include a proof of the deposit on the source chain and a destination which is owned by the depositor</li>
+<li>The bridge contract <strong>mints</strong> new tokens on the destination chain into the depositors account on this chain</li>
+</ol>
+<p>It is important to notice that the total number of liquid (non-locked) tokens on both chains combined remains the same. Exchanging the tokens on the destination chain back to native tokens uses the inverse operation, burn-and-release.</p>
+<ol>
+<li>Tokens on the destination chain are sent to a bridge contract which <strong>burns</strong> them</li>
+<li>A relayer observes this transaction and sends a new transaction to the bridge contract on the source chain. This transaction should include a proof of the burn and a destination address</li>
+<li>The bridge contract <strong>unlocks</strong> some number of tokens and deposits them into the destination account</li>
+</ol>
+<p>Provided this refunding of tokens can be executed at any time and the number of locked tokens is always equal to the number of minted wrapped tokens, then we can say that the wrapped tokens have value equal to the original asset.</p>
+<h2 id="chainbridge-components">ChainBridge Components<a class="headerlink" href="#chainbridge-components" title="Permanent link">&para;</a></h2>
+<p>A ChainBridge deployment on EVM-based chains requires the following components:</p>
+<h3 id="bridge-contract">Bridge Contract<a class="headerlink" href="#bridge-contract" title="Permanent link">&para;</a></h3>
+<p>The bridge contract must be deployed on both the source and destination chains. Its primary task on the source chain is to broker token deposits (ensure they are locked) and emit the events that the relayers listen for. On the destination chain, the bridge contract is responsible for managing a set of permissioned relayers, aggregating relayer votes on proposals passed from the source chain, and executing the desired action (e.g. minting tokens) on the destination chain when the vote threshold is reached.</p>
+<h3 id="handlers">Handlers<a class="headerlink" href="#handlers" title="Permanent link">&para;</a></h3>
+<p>To allow extensibility the bridge contract is written to call functions in a handler contract when tokens are deposited on the source chain or when a proposal is approved on the destination chain. Each resource (e.g. token) can have a unique handler. You are free to write your own handler contract that implements any functionality you like. </p>
+<p>The ERC20 handler contract that ships with ChainBridge can be configured to either lock up the tokens or burn them (if the token allows) on deposit and either mint or release tokens when a proposal is executed. A single handler can handle many tokens but their contract addresses must be registered with the handler ahead of time.</p>
+<h3 id="relayers">Relayers<a class="headerlink" href="#relayers" title="Permanent link">&para;</a></h3>
+<p>The relayer is an off-chain actor that listens for particular events on the source chain and- when certain conditions are met- will submit signed proposals to the destination chain. The addresses of the approved relayers must be registered with the bridge contract on the destination chain.</p>
+<p>Once a proposal has sufficient votes a relayer can execute the proposal to trigger the handler.</p>
+<h2 id="deploying-your-own-bridge">Deploying your own bridge<a class="headerlink" href="#deploying-your-own-bridge" title="Permanent link">&para;</a></h2>
+<h3 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h3>
+<h4 id="accounts">Accounts<a class="headerlink" href="#accounts" title="Permanent link">&para;</a></h4>
+<p>If you want to follow along with this guide we will be deploying a bridge between two Ethereum test networks (Görli and Rinkeby). </p>
+<p>You will need one account on each network from which to deploy the contracts. These can be easily created using MetaMask. <strong>Be careful to use test accounts only as some of the commands in this tutorial require access to your private key.</strong></p>
+<p>This will cost gas so some test ETH will be required. So first up grab some test ether from the faucets:</p>
+<ul>
+<li>https://goerli-faucet.slock.it/</li>
+<li>https://faucet.rinkeby.io/</li>
+</ul>
+<p>You will need around 0.1 each of Goerli ETH and Rinkeby ETH.</p>
+<p>We will be creating a bridge that wraps the test ERC20 token WEENUS on Görli as a wrapped version (wWEENUS) on Rinkeby. So also grab some free WEENUS tokens by sending a 0 ETH transaction to the contract address on Görli: 0xaFF4481D10270F50f203E0763e2597776068CBc5</p>
+<h4 id="tooling">Tooling<a class="headerlink" href="#tooling" title="Permanent link">&para;</a></h4>
+<p>We will be using the ChainBridge contract CLI to deploy and interact with the contracts. Grab and install the CLI by running: </p>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>v1.0.0<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/ChainSafe/chainbridge-deploy<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>chainbridge-deploy/cb-sol-cli<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+
+<p>This will also download and build the required Solidity contracts.</p>
+<p>To avoid duplication in the subsequent commands set the following env vars in your shell:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">SRC_GATEWAY</span><span class="p">=</span><span class="nx">https</span><span class="p">:</span><span class="c1">//goerli-light.eth.linkpool.io/</span>
+<span class="nx">DST_GATEWAY</span><span class="p">=</span><span class="nx">https</span><span class="p">:</span><span class="c1">//rinkeby-light.eth.linkpool.io/</span>
+
+<span class="nx">SRC_ADDR</span><span class="p">=</span><span class="s">&quot;&lt;Your address on Görli&gt;&quot;</span>
+<span class="nx">SRC_PK</span><span class="p">=</span><span class="s">&quot;&lt;your private key on Görli&gt;&quot;</span>
+<span class="nx">DST_ADDR</span><span class="p">=</span><span class="s">&quot;&lt;Your address on Rinkeby&gt;&quot;</span>
+<span class="nx">DST_PK</span><span class="p">=</span><span class="s">&quot;&lt;your private key on Rinkeby&gt;&quot;</span>
+
+<span class="nx">SRC_TOKEN</span><span class="p">=</span><span class="s">&quot;0xaFF4481D10270F50f203E0763e2597776068CBc5&quot;</span>
+<span class="nx">RESOURCE_ID</span><span class="p">=</span><span class="s">&quot;0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00&quot;</span>
+</code></pre></div>
+
+<p>You could also write the above to a file (e.g. <code>chainbridge-vars</code>) and load it into your shell by running <code>set -a; source ./chainbridge-vars; set +a</code>.</p>
+<p>You can use MetaMask to generate new accounts on the test networks and export your public and private keys.</p>
+<p>Additional env vars are required to be set throughout the tutorial. If a command doesn't work be sure you have set the required variables.</p>
+<h3 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h3>
+<h4 id="1-deploy-contracts-on-source-gorli">1. Deploy contracts on Source (Görli)<a class="headerlink" href="#1-deploy-contracts-on-source-gorli" title="Permanent link">&para;</a></h4>
+<p>The following command will deploy the bridge contract and ERC20 handler contract on the source.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$SRC_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$SRC_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>deploy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span>--erc20Handler<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--relayers<span class="w"> </span><span class="nv">$SRC_ADDR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--relayerThreshold<span class="w"> </span><span class="m">1</span><span class="se">\</span>
+<span class="w">    </span>--chainId<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+
+<p>Take note of the output of the above command and assign the following variables.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">SRC_BRIDGE</span><span class="o">=</span><span class="s2">&quot;&lt;resulting bridge contract address&gt;&quot;</span>
+<span class="nv">SRC_HANDLER</span><span class="o">=</span><span class="s2">&quot;&lt;resulting erc20 handler contract address&gt;&quot;</span>
+</code></pre></div>
+
+<h4 id="2-configure-contracts-on-source">2. Configure contracts on Source<a class="headerlink" href="#2-configure-contracts-on-source" title="Permanent link">&para;</a></h4>
+<p>The following registers the WEENUS token as a resource with a bridge contract and configures which handler to use.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$SRC_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$SRC_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>bridge<span class="w"> </span>register-resource<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span><span class="nv">$SRC_BRIDGE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--handler<span class="w"> </span><span class="nv">$SRC_HANDLER</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--resourceId<span class="w"> </span><span class="nv">$RESOURCE_ID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--targetContract<span class="w"> </span><span class="nv">$SRC_TOKEN</span>
+</code></pre></div>
+
+<p><em>Note: Sometimes the transaction confirmation will not be detected by the CLI. You can check the txhash in <a href="https://etherscan.io">etherscan</a> to see if it has been confirmed.</em></p>
+<h4 id="3-deploy-contracts-on-destination-rinkeby">3. Deploy contracts on Destination (Rinkeby)<a class="headerlink" href="#3-deploy-contracts-on-destination-rinkeby" title="Permanent link">&para;</a></h4>
+<p>The following command deploys the bridge contract, handler and a new ERC20 contract (wWEENUS) on the destination chain. It also configures your account as a verified relayer.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>deploy<span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span>--erc20<span class="w"> </span>--erc20Handler<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--relayers<span class="w"> </span><span class="nv">$DST_ADDR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--relayerThreshold<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chainId<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<p>Again, assign the following env variables.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">DST_BRIDGE</span><span class="o">=</span><span class="s2">&quot;&lt;resulting bridge contract address&gt;&quot;</span>
+<span class="nv">DST_HANDLER</span><span class="o">=</span><span class="s2">&quot;&lt;resulting erc20 handler contract address&gt;&quot;</span>
+<span class="nv">DST_TOKEN</span><span class="o">=</span><span class="s2">&quot;&lt;resulting erc20 token address&gt;&quot;</span>
+</code></pre></div>
+
+<h4 id="4-configure-contracts-on-destination">4. Configure contracts on Destination<a class="headerlink" href="#4-configure-contracts-on-destination" title="Permanent link">&para;</a></h4>
+<p>The following registers the new token (wWEENUS) as a resource on the bridge similar to the above.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>bridge<span class="w"> </span>register-resource<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span><span class="nv">$DST_BRIDGE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--handler<span class="w"> </span><span class="nv">$DST_HANDLER</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--resourceId<span class="w"> </span><span class="nv">$RESOURCE_ID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--targetContract<span class="w"> </span><span class="nv">$DST_TOKEN</span>
+</code></pre></div>
+
+<p>The following registers the token as mintable/burnable on the bridge.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>bridge<span class="w"> </span>set-burn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span><span class="nv">$DST_BRIDGE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--handler<span class="w"> </span><span class="nv">$DST_HANDLER</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tokenContract<span class="w"> </span><span class="nv">$DST_TOKEN</span>
+</code></pre></div>
+
+<p>The following gives permission for the handler to mint new wWEENUS tokens.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>erc20<span class="w"> </span>add-minter<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--minter<span class="w"> </span><span class="nv">$DST_HANDLER</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--erc20Address<span class="w"> </span><span class="nv">$DST_TOKEN</span>
+</code></pre></div>
+
+<h3 id="create-a-relayer">Create a Relayer<a class="headerlink" href="#create-a-relayer" title="Permanent link">&para;</a></h3>
+<p>With the above complete, the Ethereum side of the setup is finished. The only missing piece is a relayer to detect events on the source chain and submit them as proposals on the destination chain.</p>
+<p>In configuring the destination bridge contract we set the relayer threshold to 1, meaning only a single relayer must vote on a proposal for it to be approved. This is OK for testing but in practice a much larger set of relayers should be used with a suitable high threshold to make collusion difficult.</p>
+<h4 id="1-build-the-relayer">1. Build the relayer<a class="headerlink" href="#1-build-the-relayer" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>v1.1.1<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/ChainSafe/chainbridge<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>chainbridge<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>build
+</code></pre></div>
+
+<h4 id="2-author-a-config">2. Author a config<a class="headerlink" href="#2-author-a-config" title="Permanent link">&para;</a></h4>
+<p>Execute the command below to create a config file with all the variables assigned in previous steps.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;{</span>
+<span class="s2">  \&quot;chains\&quot;: [</span>
+<span class="s2">    {</span>
+<span class="s2">      \&quot;name\&quot;: \&quot;Goerli\&quot;,</span>
+<span class="s2">      \&quot;type\&quot;: \&quot;ethereum\&quot;,</span>
+<span class="s2">      \&quot;id\&quot;: \&quot;0\&quot;,</span>
+<span class="s2">      \&quot;endpoint\&quot;: \&quot;wss://goerli-light.eth.linkpool.io/ws\&quot;,</span>
+<span class="s2">      \&quot;from\&quot;: \&quot;</span><span class="nv">$SRC_ADDR</span><span class="s2">\&quot;,</span>
+<span class="s2">      \&quot;opts\&quot;: {</span>
+<span class="s2">        \&quot;bridge\&quot;: \&quot;</span><span class="nv">$SRC_BRIDGE</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;erc20Handler\&quot;: \&quot;</span><span class="nv">$SRC_HANDLER</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;genericHandler\&quot;: \&quot;</span><span class="nv">$SRC_HANDLER</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;gasLimit\&quot;: \&quot;1000000\&quot;,</span>
+<span class="s2">        \&quot;maxGasPrice\&quot;: \&quot;10000000000\&quot;</span>
+<span class="s2">      }</span>
+<span class="s2">    },</span>
+<span class="s2">    {</span>
+<span class="s2">      \&quot;name\&quot;: \&quot;Rinkeby\&quot;,</span>
+<span class="s2">      \&quot;type\&quot;: \&quot;ethereum\&quot;,</span>
+<span class="s2">      \&quot;id\&quot;: \&quot;1\&quot;,</span>
+<span class="s2">      \&quot;endpoint\&quot;: \&quot;wss://rinkeby-light.eth.linkpool.io/ws\&quot;,</span>
+<span class="s2">      \&quot;from\&quot;: \&quot;</span><span class="nv">$DST_ADDR</span><span class="s2">\&quot;,</span>
+<span class="s2">      \&quot;opts\&quot;: {</span>
+<span class="s2">        \&quot;bridge\&quot;: \&quot;</span><span class="nv">$DST_BRIDGE</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;erc20Handler\&quot;: \&quot;</span><span class="nv">$DST_HANDLER</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;genericHandler\&quot;: \&quot;</span><span class="nv">$DST_HANDLER</span><span class="s2">\&quot;,</span>
+<span class="s2">        \&quot;gasLimit\&quot;: \&quot;1000000\&quot;,</span>
+<span class="s2">        \&quot;maxGasPrice\&quot;: \&quot;10000000000\&quot;</span>
+<span class="s2">      }</span>
+<span class="s2">    }</span>
+<span class="s2">  ]</span>
+<span class="s2">}&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>config.json
+</code></pre></div>
+
+<h4 id="3-set-up-keys">3. Set up keys<a class="headerlink" href="#3-set-up-keys" title="Permanent link">&para;</a></h4>
+<p>The relayer maintains its own keystore. To add a new account on the source and destination chains run:</p>
+<div class="codehilite"><pre><span></span><code>./build/chainbridge<span class="w"> </span>accounts<span class="w"> </span>import<span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$SRC_PK</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>./build/chainbridge<span class="w"> </span>accounts<span class="w"> </span>import<span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span>
+</code></pre></div>
+
+<p><em>Note: The second command might fail if you are using the same keys on both networks. That's OK just keep going</em></p>
+<h3 id="lets-test-our-bridge">Lets test our bridge!<a class="headerlink" href="#lets-test-our-bridge" title="Permanent link">&para;</a></h3>
+<p>First start the relayer by running:</p>
+<div class="codehilite"><pre><span></span><code>./build/chainbridge<span class="w"> </span>--config<span class="w"> </span>config.json<span class="w"> </span>--verbosity<span class="w"> </span>trace<span class="w"> </span>--latest
+</code></pre></div>
+
+<p>The <code>latest</code> flag ensures that the relayer starts monitoring blocks from the most recent it can find and won't attempt to look through the history. <strong>Leave the relay running in a seperate shell while you run the commands below.</strong></p>
+<p>Approve the handler to spend tokens on our behalf (to transfer them to the token safe).</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$SRC_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$SRC_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>erc20<span class="w"> </span>approve<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--amount<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--erc20Address<span class="w"> </span><span class="nv">$SRC_TOKEN</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--recipient<span class="w"> </span><span class="nv">$SRC_HANDLER</span>
+</code></pre></div>
+
+<p><em>Note: Most ERC20 contracts use 18 decimal places. The amount specified will be encoded with the necessary decimal places. This can be configured with <code>--decimals</code> on the <code>erc20</code> command.</em></p>
+<p>Execute a deposit.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$SRC_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$SRC_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>erc20<span class="w"> </span>deposit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--amount<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dest<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span><span class="nv">$SRC_BRIDGE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--recipient<span class="w"> </span><span class="nv">$DST_ADDR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--resourceId<span class="w"> </span><span class="nv">$RESOURCE_ID</span>
+</code></pre></div>
+
+<p>The relayer will wait 10 block confirmations before submitting a request which may take a few minutes on the test network. Keep an eye on the <code>target=XXXX</code> output in the chainbridge relayer window. The transfer will occur when this reaches the block height of the deposit transaction.</p>
+<p>The relayer will show something similar to the below when it picks up a transaction and relays it.
+<img alt="" src="../img/shell-relaying.png" /></p>
+<p>Some time later it will execute the proposal on the destination chain.</p>
+<p><img alt="" src="../img/shell-proposal-executed.png" /></p>
+<p>When checking your balance for the token on the destination chain you should see the inbound tokens from the handler.</p>
+<p>Proposals will continue to be forwarded provided you keep the relayer process running.</p>
+<h2 id="and-back-again">And back again!<a class="headerlink" href="#and-back-again" title="Permanent link">&para;</a></h2>
+<p>The bridge we've created already supports bi-directional transactions. We can submit a transaction to move tokens back from the destination to the source.</p>
+<p>Approve the handler on the destination chain to move tokens on our behalf (to burn them).</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>erc20<span class="w"> </span>approve<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--amount<span class="w"> </span><span class="m">1000000000000000000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--erc20Address<span class="w"> </span><span class="nv">$DST_TOKEN</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--recipient<span class="w"> </span><span class="nv">$DST_HANDLER</span>
+</code></pre></div>
+
+<p>Transfer the wrapped tokens back to the bridge. This should result in the locked tokens being freed on the source chain and returned to your account.</p>
+<div class="codehilite"><pre><span></span><code>cb-sol-cli<span class="w"> </span>--url<span class="w"> </span><span class="nv">$DST_GATEWAY</span><span class="w"> </span>--privateKey<span class="w"> </span><span class="nv">$DST_PK</span><span class="w"> </span>--gasPrice<span class="w"> </span><span class="m">10000000000</span><span class="w"> </span>erc20<span class="w"> </span>deposit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--amount<span class="w"> </span><span class="m">1000000000000000000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dest<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bridge<span class="w"> </span><span class="nv">$DST_BRIDGE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--recipient<span class="w"> </span><span class="nv">$SRC_ADDR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--resourceId<span class="w"> </span><span class="nv">$RESOURCE_ID</span>
+</code></pre></div>
+
+<h2 id="closing-thoughts">Closing thoughts<a class="headerlink" href="#closing-thoughts" title="Permanent link">&para;</a></h2>
+<p>It is also simple to extend the above to work with non-fungible assets (e.g. ERC721) by deploying another handler contract and reconfiguring the bridge.</p>
+<p>Of course having a single relayer is a highly centralised way to be running the bridge. With additional calls to <a href="https://github.com/ChainSafe/chainbridge-deploy/blob/v1.0.0/cb-sol-cli/docs/admin.md#add-relayer"><code>add-relayer</code></a> it is easy to set up extra accounts that can relay simultaneuosly. Once there are plenty of relayers you can increase the vote threshold so that a certain number of relayers need to agree on a proposal before it is executed.</p>
+<p>Read the <a href="https://github.com/ChainSafe/chainbridge-deploy/blob/release/v1.0.0/cb-sol-cli/README.md">documentation for the CLI tool</a> to see how the bridge contract and handlers can be configured for different scenarios.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ChainSafe/ChainBridge" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+    
+  </body>
+</html>
